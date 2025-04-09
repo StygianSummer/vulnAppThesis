@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Learn About Vulnerabilities{% endblock %}
+
+{% block content %}
+  <h2>Learn About Vulnerabilities</h2>
+  <p>Select a topic to learn:</p>
+  <ul>
+      <li><a href="{{ url_for('main.learn_sqli') }}">SQL Injection</a></li>
+      <li><a href="{{ url_for('main.learn_xss') }}">Cross Site Scripting (XSS)</a></li>
+      <li><a href="{{ url_for('main.learn_crypto') }}">Cryptographic Failures</a></li>
+  </ul>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block title %}Fixed SQL Injection{% endblock %}
+
+{% block content %}
+<h2>✅ Fixed SQL Injection</h2>
+
+<form method="post">
+  <label for="search">Search employee by name (safe):</label>
+  <input type="text" name="search" id="search" required>
+  <button type="submit">Submit</button>
+</form>
+
+{% if query %}
+  <h3>🧪 Executed Query:</h3>
+  <pre>{{ query }}</pre>
+{% endif %}
+
+{% if result %}
+  <h3>📄 Result:</h3>
+  <table border="1">
+    <tr><th>ID</th><th>Name</th><th>Role</th><th>Salary</th></tr>
+    {% for row in result %}
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+
+<hr>
+
+<h3>🔒 How This Fix Works</h3>
+<p>
+  This version uses <strong>parameterized queries</strong> (aka prepared statements),
+  which securely separate SQL code from user input. This prevents malicious input from
+  altering the structure of the query.
+</p>
+
+<div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+  <div style="flex: 1;">
+    <h4 style="color: red;">❌ Vulnerable Version</h4>
+    <pre>
+query = f"SELECT * FROM employees WHERE name = '{user_input}'"
+cursor.execute(query)
+    </pre>
+  </div>
+  <div style="flex: 1;">
+    <h4 style="color: green;">✅ Secure Version</h4>
+    <pre>
+query = "SELECT * FROM employees WHERE name = ?"
+cursor.execute(query, (user_input,))
+    </pre>
+  </div>
+</div>
+
+<hr>
+
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('sqli.sqli') }}">← Back to vulnerable version</a>
+  <a href="{{ url_for('sqli.sqli_summary') }}" class="btn btn-success" style="margin-left: 1rem;">What You Learned</a>
+</div>
+
+{% endblock %}

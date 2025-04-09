@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}XSS{% endblock %}
+{% block content %}
+  <h2>Try Cross-Site Scripting (XSS)</h2>
+  <form method="POST" action="{{ url_for('main.xss') }}">
+    <div class="mb-3">
+      <label for="comment" class="form-label">Leave a Comment</label>
+      <input type="text" class="form-control" name="comment" id="comment">
+    </div>
+    <button type="submit" class="btn btn-warning">Post</button>
+  </form>
+{% endblock %}
+

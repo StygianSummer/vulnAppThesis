@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}SQL Injection Demo{% endblock %}
+
+{% block content %}
+<h2>❗ SQL Injection Vulnerability Demo</h2>
+
+<form method="post">
+  <label for="search">Search employee by name (vulnerable):</label>
+  <input type="text" name="search" id="search" required>
+  <button type="submit">Submit</button>
+</form>
+
+{% if query %}
+  <h3>🧪 Executed Query:</h3>
+  <pre>{{ query }}</pre>
+{% endif %}
+
+{% if result %}
+  <h3>📄 Result:</h3>
+  <table border="1">
+    <tr><th>ID</th><th>Name</th><th>Role</th><th>Salary</th></tr>
+    {% for row in result %}
+      <tr>
+        <td>{{ row[0] }}</td>
+        <td>{{ row[1] }}</td>
+        <td>{{ row[2] }}</td>
+        <td>{{ row[3] }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+{% endif %}
+
+<hr>
+
+<h3>🎯 Try These Inputs</h3>
+<ul>
+  <li><code>' OR 1=1--</code> – See all employees</li>
+  <li><code>Alice</code> – Normal input</li>
+  <li><code>Bob'; DROP TABLE employees;--</code> – Simulated destructive input (safe in demo)</li>
+</ul>
+
+<hr>
+
+<h3>🛠️ Understanding the Risk</h3>
+<p>
+  This version directly injects user input into SQL code using string formatting,
+  making it vulnerable to SQL injection attacks. Malicious users can manipulate the query
+  to view unauthorized data or attempt destructive operations.
+</p>
+
+<div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+  <div style="flex: 1;">
+    <h4 style="color: red;">❌ Vulnerable Code</h4>
+    <pre>
+query = f"SELECT * FROM employees WHERE name = '{user_input}'"
+cursor.execute(query)
+    </pre>
+  </div>
+  <div style="flex: 1;">
+    <h4 style="color: green;">✅ Secure Alternative</h4>
+    <pre>
+query = "SELECT * FROM employees WHERE name = ?"
+cursor.execute(query, (user_input,))
+    </pre>
+  </div>
+</div>
+
+<hr>
+
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('sqli.sqli_fixed') }}" class="btn btn-warning">View Fixed Version →</a>
+  <a href="{{ url_for('sqli.sqli_summary') }}" class="btn btn-success" style="margin-left: 1rem;">What You Learned</a>
+</div>
+
+{% endblock %}

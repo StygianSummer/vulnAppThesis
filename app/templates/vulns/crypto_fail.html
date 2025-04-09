@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Cryptographic Failure{% endblock %}
+{% block content %}
+  <h2>Try Cryptographic Failure</h2>
+  <form method="POST" action="{{ url_for('main.crypto_fail') }}">
+    <div class="mb-3">
+      <label for="message" class="form-label">Enter a message to "encrypt"</label>
+      <input type="text" class="form-control" name="message" id="message">
+    </div>
+    <button type="submit" class="btn btn-secondary">Submit</button>
+  </form>
+{% endblock %}

@@ -1,0 +1,21 @@
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-09 19:44:04.288213
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-09 19:47:41.644098
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-09 19:48:05.436908
+Query: SELECT * FROM employees WHERE name = ?
+Result: []
+===============================

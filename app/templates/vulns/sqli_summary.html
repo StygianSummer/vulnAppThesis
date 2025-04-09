@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}SQL Injection Summary{% endblock %}
+
+{% block content %}
+<h2>🧠 What You Learned: SQL Injection</h2>
+
+<p>
+  SQL Injection (SQLi) is a common web vulnerability that allows attackers to interfere with the queries an application makes to its database.
+</p>
+
+<h3>🔍 What Went Wrong</h3>
+<ul>
+  <li>User input was directly injected into an SQL query string.</li>
+  <li>Malicious input like <code>' OR 1=1 --</code> could bypass intended logic.</li>
+  <li>Destructive queries (like <code>DROP TABLE</code>) could be attempted.</li>
+</ul>
+
+<h3>🛡️ How to Fix It</h3>
+<ul>
+  <li>Use <strong>parameterized queries</strong> (also called prepared statements).</li>
+  <li>Never concatenate user input directly into a query string.</li>
+  <li>Use input validation if applicable.</li>
+</ul>
+
+<h3>💡 Example Fix</h3>
+<div style="display: flex; gap: 2rem;">
+  <div>
+    <h4>❌ Vulnerable</h4>
+    <pre>
+query = f"SELECT * FROM employees WHERE name = '{user_input}'"
+cursor.execute(query)
+    </pre>
+  </div>
+  <div>
+    <h4>✅ Secure</h4>
+    <pre>
+query = "SELECT * FROM employees WHERE name = ?"
+cursor.execute(query, (user_input,))
+    </pre>
+  </div>
+</div>
+
+<h3>✅ You Should Now Be Able To:</h3>
+<ul>
+  <li>Identify SQL injection vulnerabilities.</li>
+  <li>Demonstrate how SQLi can be exploited.</li>
+  <li>Implement proper fixes using parameterized queries.</li>
+</ul>
+
+<br>
+<a href="{{ url_for('main.quiz_sqli') }}" class="btn btn-primary">Take the SQLi Quiz</a>
+{% endblock %}
