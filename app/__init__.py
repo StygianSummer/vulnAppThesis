@@ -27,4 +27,7 @@ def create_app(config_class=Config):
     from app.vulns.sqli.routes import bp_sqli
     app.register_blueprint(bp_sqli)
 
+    from app.vulns.xss.routes import bp_xss
+    app.register_blueprint(bp_xss)
+
     return app

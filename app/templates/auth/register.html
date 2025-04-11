@@ -8,6 +8,7 @@
         {{ form.username.label(class="form-label") }}
         {{ form.username(class="form-control") }}
     </div>
+    <p> <i> Please give a Fake email </i> </p>
     <div class="mb-3">
         {{ form.email.label(class="form-label") }}
         {{ form.email(class="form-control") }}
@@ -21,5 +22,9 @@
         {{ form.password2(class="form-control") }}
     </div>
     {{ form.submit(class="btn btn-success") }}
+
+    <hr>
+    <a href="{{ url_for('auth.login') }}" class="btn btn-warning">Already have an Account?</a>
+
 </form>
 {% endblock %}

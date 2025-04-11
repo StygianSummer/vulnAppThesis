@@ -1,13 +1,39 @@
 {% extends 'base.html' %}
-{% block title %}XSS{% endblock %}
-{% block content %}
-  <h2>Try Cross-Site Scripting (XSS)</h2>
-  <form method="POST" action="{{ url_for('main.xss') }}">
-    <div class="mb-3">
-      <label for="comment" class="form-label">Leave a Comment</label>
-      <input type="text" class="form-control" name="comment" id="comment">
-    </div>
-    <button type="submit" class="btn btn-warning">Post</button>
-  </form>
-{% endblock %}
+{% block title %}XSS Injection{% endblock %}
 
+{% block content %}
+<h2>XSS Demo</h2>
+
+<p>
+  Below is a comment box.
+  <br>
+  The code takes user input from the comment box form and injects it directly into the page using an f-string.
+  This is dangerous because if a user submits malicious HTML or JavaScript—like <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>—it will be executed by the browser.
+  <br>
+  Try these scripts:
+</p>
+<ul>
+  <li><code>&lt;script&gt;alert('XSS!')&lt;/script&gt;</code></li>
+  <li><code>&lt;img src=x onerror="alert('XSS')"&gt;</code></li>
+</ul>
+
+<form method="post">
+  <label for="comment">Comment:</label><br>
+  <textarea name="comment" rows="3" cols="60" required></textarea><br>
+  <button type="submit" class="btn btn-danger mt-2">Post</button>
+</form>
+
+{% if comment %}
+  <hr>
+  <h4>Output </h4>
+  <div style="border: 1px solid #ccc; padding: 1rem;">
+    {{ comment | safe }}
+  </div>
+
+  <h5 class="mt-4"> Executed script:</h5>
+  <pre>{{ comment }}</pre>
+{% endif %}
+
+<hr>
+<a href="{{ url_for('xss.xss_fix') }}" class="btn btn-warning">Try Fixing This</a>
+{% endblock %}

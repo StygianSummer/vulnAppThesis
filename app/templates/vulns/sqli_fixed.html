@@ -2,16 +2,20 @@
 {% block title %}Fixed SQL Injection{% endblock %}
 
 {% block content %}
-<h2>✅ Fixed SQL Injection</h2>
+<h2>Fixed SQL Injection</h2>
+<p> In the previous page, you executed certain queries on a vulnerable input field.
+  <br>
+  Please try the same inputs as before in the following box</p>
 
 <form method="post">
-  <label for="search">Search employee by name (safe):</label>
+  <label for="search">Search employee name:</label>
   <input type="text" name="search" id="search" required>
   <button type="submit">Submit</button>
 </form>
 
 {% if query %}
-  <h3>🧪 Executed Query:</h3>
+  <p>As you can see, the results are different.</p>
+  <h3>The Query Executed:</h3>
   <pre>{{ query }}</pre>
 {% endif %}
 
@@ -32,29 +36,23 @@
 
 <hr>
 
-<h3>🔒 How This Fix Works</h3>
-<p>
-  This version uses <strong>parameterized queries</strong> (aka prepared statements),
-  which securely separate SQL code from user input. This prevents malicious input from
-  altering the structure of the query.
-</p>
+<h3>Input examples:</h3>
+<ol>
+  <li><code>Alice</code></li>
+  <p>This is an example of a normal input searching for Alice</p>
+  <li><code>' OR 1=1--</code> </li>
+  <p>If the input field is vulnerable to SQL Injection, this lets you see all the employees</p>
+  <li><code>Bob'; DROP TABLE employees;--</code> </li>
+  <p>If the input field is vulnerable to SQL Injection, this lets you drop the table employees from the database</p>
+</ol>
 
-<div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-  <div style="flex: 1;">
-    <h4 style="color: red;">❌ Vulnerable Version</h4>
-    <pre>
-query = f"SELECT * FROM employees WHERE name = '{user_input}'"
-cursor.execute(query)
-    </pre>
-  </div>
-  <div style="flex: 1;">
-    <h4 style="color: green;">✅ Secure Version</h4>
-    <pre>
-query = "SELECT * FROM employees WHERE name = ?"
-cursor.execute(query, (user_input,))
-    </pre>
-  </div>
-</div>
+<h3>How does the fix work?</h3>
+<p>
+  This version uses parameterized queries to securely separate SQL code from user input. This prevents malicious input from
+  changing the structure of the query.
+  <br>
+  Look at the executed query above. If you used an invalid input, it does not show a result.
+</p>
 
 <hr>
 

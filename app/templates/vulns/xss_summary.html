@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}What You Learned: XSS{% endblock %}
+
+{% block content %}
+<h2>What You Learned: Cross-Site Scripting (XSS)</h2>
+
+<p>
+Definition
+</p>
+
+<h3>Examples of Dangerous Input:</h3>
+<p>
+Examples of inputs and what they do
+</p>
+
+<h3>How to Prevent XSS:</h3>
+<p>
+Add info
+</p>
+
+<h3>Learning objectives Completed:</h3>
+<p>To Write</p>
+
+<h4>Wanna learn more?</h4>
+<p>Here are a few resources <br> Add Links Here</p>
+<br>
+
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('xss.xss_demo') }}">← Back to XSS Demo</a>
+  <a href="{{ url_for('main.quiz_xss') }}" class="btn btn-primary" style="margin-left: 1rem;">Take Quiz</a>
+</div>
+{% endblock %}

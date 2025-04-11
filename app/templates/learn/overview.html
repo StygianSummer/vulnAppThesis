@@ -3,7 +3,13 @@
 
 {% block content %}
   <h2>Learn About Vulnerabilities</h2>
-  <p>Select a topic to learn:</p>
+  <h5><i>To Explain:</i></h5>
+  <ul><b>
+      <li>What are vulnerabilities</li>
+      <li>What is a web vulnerability</li>
+      <li>Examples of web vulnerabilities minimal</li>
+  </b> </ul>
+  <p>Learn more about:</p>
   <ul>
       <li><a href="{{ url_for('main.learn_sqli') }}">SQL Injection</a></li>
       <li><a href="{{ url_for('main.learn_xss') }}">Cross Site Scripting (XSS)</a></li>

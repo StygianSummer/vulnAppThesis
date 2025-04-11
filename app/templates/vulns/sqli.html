@@ -2,16 +2,18 @@
 {% block title %}SQL Injection Demo{% endblock %}
 
 {% block content %}
-<h2>❗ SQL Injection Vulnerability Demo</h2>
+<h2>SQL Injection Demo</h2>
+
+<p><b>Below is an input field vulnerable to SQL injection.</b></p>
 
 <form method="post">
-  <label for="search">Search employee by name (vulnerable):</label>
+  <label for="search">Search employee name:</label>
   <input type="text" name="search" id="search" required>
   <button type="submit">Submit</button>
 </form>
 
 {% if query %}
-  <h3>🧪 Executed Query:</h3>
+  <h3>Executed Query:</h3>
   <pre>{{ query }}</pre>
 {% endif %}
 
@@ -32,44 +34,45 @@
 
 <hr>
 
-<h3>🎯 Try These Inputs</h3>
-<ul>
-  <li><code>' OR 1=1--</code> – See all employees</li>
-  <li><code>Alice</code> – Normal input</li>
-  <li><code>Bob'; DROP TABLE employees;--</code> – Simulated destructive input (safe in demo)</li>
-</ul>
+<h3>Try The Following Inputs to start</h3>
+<ol>
+  <li><code>Alice</code></li>
+  <p>This is an example of a normal input searching for Alice</p>
+  <li><code>' OR 1=1--</code> </li>
+  <p>This lets you see all the employees</p>
+  <li><code>Bob'; DROP TABLE employees;--</code> </li>
+  <p>This lets you drop the table employees from the database</p>
+</ol>
 
 <hr>
 
-<h3>🛠️ Understanding the Risk</h3>
+<h3>Why is this a risk?</h3>
 <p>
-  This version directly injects user input into SQL code using string formatting,
-  making it vulnerable to SQL injection attacks. Malicious users can manipulate the query
-  to view unauthorized data or attempt destructive operations.
+  As you saw in the learn page, having this vulnerability is particularly risky for a website.
+  A malicious user can use queries such as the ones above to get data they are not authorised to see or change, or even destroy databases.
 </p>
 
-<div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-  <div style="flex: 1;">
-    <h4 style="color: red;">❌ Vulnerable Code</h4>
-    <pre>
-query = f"SELECT * FROM employees WHERE name = '{user_input}'"
-cursor.execute(query)
-    </pre>
-  </div>
-  <div style="flex: 1;">
-    <h4 style="color: green;">✅ Secure Alternative</h4>
-    <pre>
-query = "SELECT * FROM employees WHERE name = ?"
-cursor.execute(query, (user_input,))
-    </pre>
-  </div>
-</div>
-
+<H2>How to fix this?</H2>
+<h4 style="color: red;">Vulnerable Code</h4>
+<p>The code below is vulnerable to SQL Injection. This is because the user Input is directly embedded into a query:</p>
+  <code>
+  query = f"SELECT * FROM employees WHERE name = '{user_input}'"
+  cursor.execute(query)
+  </code>
+<br>
+<br>
+<h4 style="color: green;">Secure Alternative</h4>
+<p>However this can be solved by using parameterised Queries, queries with placeholders for user data:</p>
+    <code>
+  query = "SELECT * FROM employees WHERE name = ?"
+  cursor.execute(query, (user_input,))
+    </code>
+<br>
+<p>These days, many database libraries provide SQL injection protection by default.</p>
 <hr>
 
 <div style="margin-top: 2rem;">
   <a href="{{ url_for('sqli.sqli_fixed') }}" class="btn btn-warning">View Fixed Version →</a>
-  <a href="{{ url_for('sqli.sqli_summary') }}" class="btn btn-success" style="margin-left: 1rem;">What You Learned</a>
 </div>
 
 {% endblock %}

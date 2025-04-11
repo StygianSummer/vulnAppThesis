@@ -3,11 +3,15 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block content %}
-  <h2>Hello, {{ current_user.username }}!</h2>
-  <p>Choose a topic to explore:</p>
+  <h2>Hi {{ current_user.username }}!</h2>
+  <p><b>If it is your first time here, I recommend starting here:</b></p>
+  <a href="{{ url_for('main.learn') }}" class="btn btn-primary" style="margin-right: 1rem;">Learn about vulnerabilities</a>
+  <br>
+  <br>
+  <h6>Or feel free to explore any of the pages below:</h6>
   <ul>
     <li><a href="{{ url_for('main.learn') }}">Learn about Vulnerabilities</a></li>
-    <li><a href="{{ url_for('main.sqli') }}">Try SQL Injection</a></li>
+    <li><a href="{{ url_for('sqli.sqli') }}">Try SQL Injection</a></li>
     <li><a href="{{ url_for('main.xss') }}">Try XSS</a></li>
     <li><a href="{{ url_for('main.crypto_fail') }}">Try Cryptographic Failure</a></li>
     <li><a href="{{ url_for('main.final_quiz') }}">Final Quiz</a></li>

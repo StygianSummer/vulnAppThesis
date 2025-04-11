@@ -48,16 +48,11 @@ def learn_xss():
 def learn_crypto():
     return render_template('learn/crypto_fail_learn.html')
 
-# Quiz pages
+# Quiz pages later to be moved except for final quiz which stays here
 @bp.route('/final_quiz')
 @login_required
 def final_quiz():
     return render_template('quiz/final_quiz.html')
-
-@bp.route('/quiz/sqli')
-@login_required
-def quiz_sqli():
-    return render_template('quiz/sqli_quiz.html')
 
 @bp.route('/quiz/xss')
 @login_required
@@ -95,10 +90,17 @@ def logs():
                 entry = entry.strip()
                 if "SQLI ATTEMPT" in entry:
                     logs_data['sqli'].append(entry)
-                elif "XSS ATTEMPT" in entry:
+                elif "XSS ATTEMPT" in entry or "XSS FIX ATTEMPT" in entry:
                     logs_data['xss'].append(entry)
-                elif "QUIZ SUBMISSION" in entry:
-                    logs_data['quiz'].append(entry)
+                elif "QUIZ SUBMISSION: SQLI" in entry:
+                    logs_data['quiz'].append(" [SQLI QUIZ]\n" + entry)
+                elif "QUIZ SUBMISSION: XSS" in entry:
+                    logs_data['quiz'].append(" [XSS QUIZ]\n" + entry)
+                elif "QUIZ SUBMISSION: CRYPTO" in entry:
+                    logs_data['quiz'].append(" [CRYPTO QUIZ]\n" + entry)
+                elif "QUIZ SUBMISSION: FINAL" in entry:
+                    logs_data['quiz'].append(" [Final Quiz]\n" + entry)
+
 
     logs_data['sqli'].reverse()
     logs_data['xss'].reverse()

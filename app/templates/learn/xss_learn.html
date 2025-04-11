@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>xss learn</title>
-    <H2>XSS Learn</H2>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Learn About XSS{% endblock %}
+{% block content %}
+<h5><i>To Explain:</i></h5>
+  <ul><b>
+      <li>What is XSS</li>
+      <li>Risks?</li>
+      <li>Examples and fixing</li>
+  </b> </ul>
+    <p>Wanna Learn more?</p>
+    <ul>
+      <li>Links to pages with more info and resources</li>
+    </ul>
 
-</body>
-</html>
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('main.learn') }}">← Back to Learn about vulnerabilities</a>
+  <a href="{{ url_for('xss.xss_demo') }}" class="btn btn-primary" style="margin-left: 1rem;">Try XSS Demo</a>
+</div>
+
+{% endblock %}

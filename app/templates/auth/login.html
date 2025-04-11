@@ -13,5 +13,7 @@
         {{ form.password(class="form-control") }}
     </div>
     {{ form.submit(class="btn btn-primary") }}
+   <hr>
+    <a href="{{ url_for('auth.register') }}" class="btn btn-warning">Don't have an Account?</a>
 </form>
 {% endblock %}

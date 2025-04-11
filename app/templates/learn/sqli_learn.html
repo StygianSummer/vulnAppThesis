@@ -1,11 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>sqli learn</title>
-    <h2>SQLI LEARN</h2>
+{% extends 'base.html' %}
+{% block title %}Learn About SQL Injection{% endblock %}
+{% block content %}
+<h5><i>To Explain:</i></h5>
+  <ul><b>
+      <li>What is an SQL Injection</li>
+      <li>Risks?</li>
+      <li>Examples and fixing</li>
+  </b> </ul>
+    <p>Wanna Learn more?</p>
     <ul>
-      <li><a href="{{ url_for('main.quiz_sqli') }}">SQL Injection Quiz</a></li>
-
+      <li>Links to pages with more info and resources</li>
     </ul>
-</html>
+
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('main.learn') }}">← Back to Learn about vulnerabilities</a>
+  <a href="{{ url_for('sqli.sqli') }}" class="btn btn-primary" style="margin-left: 1rem;">Try SQL Injection Demo</a>
+</div>
+
+{% endblock %}
+

@@ -19,3 +19,267 @@ Time: 2025-04-09 19:48:05.436908
 Query: SELECT * FROM employees WHERE name = ?
 Result: []
 ===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-09 21:55:19.762872
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-09 21:55:59.130487
+Query: SELECT * FROM employees WHERE name = ?
+Result: []
+===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-09 22:00:49.153201
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-10 00:00:56.641798
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-10 00:01:14.904241
+Query: SELECT * FROM employees WHERE name = ?
+Result: []
+===============================
+
+===== SQLI FIX ATTEMPT =====
+User: user
+Time: 2025-04-10 21:26:18.154740
+Submitted Fix: f"SELECT * FROM employees WHERE name = '{user_input}'"
+Secure: No
+=============================
+
+===== XSS ATTEMPT =====
+User: user
+Time: 2025-04-10 21:38:23.332822
+Comment: <img src=x onerror="alert('XSS')">
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-10 21:38:57.561565
+Safe: False
+Code:
+def render(comment):
+
+    return comment
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-10 21:39:24.212045
+Safe: True
+Code:
+def render(comment):
+
+    return html.escape(comment)
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-10 21:39:41.494940
+Safe: False
+Code:
+def render(comment):
+
+    return comment
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-10 21:41:40.511050
+Safe: False
+Code:
+
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-10 21:41:59.328688
+Safe: True
+Code:
+def render(comment):
+
+    return html.escape(comment)
+================================
+
+===== XSS ATTEMPT =====
+User: user
+Time: 2025-04-10 21:58:18.189415
+Comment: <img src=x onerror="alert('XSS')">
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-10 21:58:48.793477
+Safe: True
+Code:
+html.escape()
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-11 17:03:56.739202
+Safe: True
+Code:
+from flask import request
+
+comment = html.escape(request.form['comment'])
+
+return f"<p>User said: {comment}</p>"
+
+
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 18:07:22.692944
+Score: 7/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: b
+q5_3: c
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 18:07:37.103354
+Score: 1/7
+q1: opt2
+q2: opt2
+q3: y
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 18:10:23.183329
+Score: 7/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: b
+q5_3: c
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 18:12:14.978696
+Score: 7/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: b
+q5_3: c
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 18:13:40.469994
+Score: 7/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: b
+q5_3: c
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 18:15:09.020342
+Score: 4/7
+q1: opt1
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: d
+q5_3: b
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 18:16:21.589961
+Score: 7/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: b
+q5_3: c
+================================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-11 19:20:47.403859
+Query: SELECT * FROM employees WHERE name = ?
+Result: []
+===============================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-11 19:22:10.142272
+Query: SELECT * FROM employees WHERE name = ?
+Result: []
+===============================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 19:43:15.186487
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+
+===== XSS ATTEMPT =====
+User: user
+Time: 2025-04-11 19:45:15.160313
+Comment: <script>alert('XSS!')</script>
+================================
+
+===== XSS ATTEMPT =====
+User: user
+Time: 2025-04-11 19:45:58.414955
+Comment: <img src=x onerror="alert('XSS')">
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-11 19:53:44.696348
+Safe: True
+Code:
+from flask import request
+comment = html.escape(request.form['comment'])
+return f"<p>User said: {comment}</p>"
+================================
