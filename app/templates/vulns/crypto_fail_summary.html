@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block title %}Cryptographic Failures Summary{% endblock %}
+
+{% block content %}
+<h1>Summary: Cryptographic Failures</h1>
+
+<div class="text-center">
+  <img src="{{ url_for('static', filename='images/EncryptDecryptHacker.png') }}"
+       alt="Encryption and Decryption"
+       style="max-width: 600px; width: 100%; margin: 2rem auto;">
+</div>
+
+<div class="section">
+  <p>
+    Cryptographic failures occur when sensitive data like passwords or personal info is not properly protected. These failures can lead to serious consequences like data breaches, identity theft, and even compromise of user accounts.
+  </p>
+</div>
+
+<hr>
+
+<h3>Some Important things to Keep in mind:</h3>
+<ul>
+  <li>Storing data in plaintext or using encoding with Base64 is not secure.</li>
+  <li>Encryption must be implemented with secure key management and modern algorithms.</li>
+  <li>Passwords should never be encrypted. They must be <i>hashed</i> with secure algorithms.</li>
+  <li>Hashing is one-way and cannot be reversed, which makes it ideal for password storage.</li>
+  <li>Using HTTPS is essential to prevent attackers from spying on data in transit.</li>
+</ul>
+
+<hr>
+
+<h3>Recap! What we did in the demos:</h3>
+<ul>
+    <li><strong>Fix Demo:</strong> showed how symmetric encryption and hashing work.</li>
+  <li><strong>Plaintext Demo</strong> showed how attackers can instantly see passwords if they're not protected.</li>
+  <li><strong>Base64 Demo</strong> demonstrated how it is important to have strong encryption methods (unlike Base64 which is just encoding and easily reversed).</li>
+</ul>
+
+<hr>
+
+<h3>Optional Further Reading</h3>
+<ul>
+  <li><a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/" target="_blank">OWASP – A02:2021 Cryptographic Failures</a></li>
+  <li><a href="https://www.pentestpeople.com/blog-posts/owasp-top-ten-cryptographic-failures" target="_blank">Pentest People – OWASP Top Ten: Cryptographic Failures</a></li>
+  <li><a href="https://medium.com/@ajay.monga73/cryptographic-failures-understanding-and-preventing-vulnerabilities-91c8b2c56854" target="_blank">Medium – Understanding and Preventing Cryptographic Failures</a></li>
+    <li><a href="https://cloud.google.com/learn/what-is-encryption"> Google Cloud – What is Encryption?</li>
+    <li><a href="https://en.wikipedia.org/wiki/Hash_function"> Wikipedia – Hashing</a></li>
+</ul>
+<hr>
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('main.learn_crypto') }}" class="btn btn-secondary">← Back to Learn Page</a>
+  <a href="{{ url_for('crypto_fail.crypto_fail_fix') }}" class="btn btn-warning">Redo the Demo</a>
+  <a href="{{ url_for('crypto_fail.quiz') }}" class="btn btn-primary">Take the Quiz</a>
+</div>
+
+{% endblock %}

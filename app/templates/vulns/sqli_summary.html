@@ -2,46 +2,53 @@
 {% block title %}SQL Injection Summary{% endblock %}
 
 {% block content %}
-<h2> What You Learned: SQL Injection Demo</h2>
-
+<h2>Summary: SQL Injection</h2>
+<hr>
 <p>
-  Definition
-</p>
+<i>SQL Injection</i> is a web vulnerability that allows input to be used to build a SQL query without proper validation or escaping. Attackers can interfere with and manipulate queries that an application makes to its database.
+  <br>
+  This can let an attacker gain unauthorised access, make changes to, or delete a database's content including user accounts.</p>
 
-<h3>Vulnerable Input field: The problem</h3>
-<p>
-  Explain how because user input was directly injected into an SQL query,
-  malicious input and destructive queries etc could be used.
-</p>
+<h4>Demo: What went wrong?</h4>
+<ul>
+  <li>The application directly inserted user input into SQL queries.</li>
+  <li>This allowed attackers to inject SQL commands such as ' OR '1'='1 to dump data or other SQL commands on the database to alter, add or delete from the database</li>
+</ul>
 
-<h3>The Fix</h3>
-<p>
-  Explain parameterized queries, and input validation.
-</p>
+<h4>Fixing the problem</h4>
+<ul>
+  <li>Use parameterized queries (also called prepared statements) to separate code from data.</li>
+  <li>Never insert raw user input directly into SQL strings.</li>
+</ul>
 
-<h3>Example</h3>
-<h4 style="color: red;">Vulnerable Code</h4>
-<p>The code below is vulnerable to SQL Injection. This is because the user Input is directly embedded into a query:</p>
-  <code>
-  query = f"SELECT * FROM employees WHERE name = '{user_input}'"
-  cursor.execute(query)
-  </code>
-<br>
-<br>
-<h4 style="color: green;">Secure Alternative</h4>
-<p>However this can be solved by using parameterised Queries, queries with placeholders for user data:</p>
-    <code>
-  query = "SELECT * FROM employees WHERE name = ?"
-  cursor.execute(query, (user_input,))
-    </code>
+<h6>Example of Vulnerable Query code:</h6>
+<pre><code>
+username = request.form['username']
+password = request.form['password']
+query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
+</code></pre>
 
+<h6>Example of Safe Query code:</h6>
+<pre><code>
+username = request.form['username']
+password = request.form['password']
+cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+</code></pre>
+
+<i>For a more in depth understanding of this vulnerability, please consult the optional reading below.</i>
 <br><br>
+<h4>Optional Further Reading</h4>
+<ul>
+  <li><a href="https://www.w3schools.com/sql/sql_syntax.asp" target="_blank">W3Schools – SQL Syntax</a></li>
+  <li><a href="https://www.w3schools.com/sql/sql_injection.asp" target="_blank">W3Schools – SQL Injection</a></li>
+  <li><a href="https://darknetdiaries.com/episode/2/" target="_blank">[Podcast] Darknet Diaries – EP 2: The Peculiar Case of the VTech Hacker</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/SQL_injection" target="_blank">Wikipedia – SQL Injection</a></li>
+</ul>
 
-<h3>Learning objectives Completed:</h3>
-<p>To Write</p>
-
-<h4>Wanna learn more?</h4>
-<p>Here are a few resources <br> Add Links Here</p>
-<br>
-<a href="{{ url_for('sqli.quiz') }}" class="btn btn-primary">Take the SQLi Quiz</a>
+<hr>
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('main.learn_sqli') }}" class="btn btn-secondary">Back to Learn Page</a>
+  <a href="{{ url_for('sqli.sqli') }}" class="btn btn-warning">Redo SQLi Demo</a>
+  <a href="{{ url_for('sqli.quiz') }}" class="btn btn-primary">Take the Quiz</a>
+</div>
 {% endblock %}

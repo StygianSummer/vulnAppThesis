@@ -8,11 +8,12 @@
         {{ form.username.label(class="form-label") }}
         {{ form.username(class="form-control") }}
     </div>
-    <p> <i> Please give a Fake email </i> </p>
+    <p> <i style="color:darkred;"> Please give an email (A fake email is okay as long as it has the right syntax)</i> </p>
     <div class="mb-3">
         {{ form.email.label(class="form-label") }}
         {{ form.email(class="form-control") }}
     </div>
+    <i><p style="color:darkred;">Password needs to be minimum 8 characters with an uppercase character, a lowercase character, a digit, and special characters</p></i>
     <div class="mb-3">
         {{ form.password.label(class="form-label") }}
         {{ form.password(class="form-control") }}

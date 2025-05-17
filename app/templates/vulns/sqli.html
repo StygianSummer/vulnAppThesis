@@ -3,6 +3,9 @@
 
 {% block content %}
 <h2>SQL Injection Demo</h2>
+<div style="position: fixed; top: 0.5rem; right: 4.5rem; z-index: 1050;">
+  <a href="{{ url_for('main.learn_sqli') }}" class="btn btn-warning">Back to Learn Page</a>
+</div>
 
 <p><b>Below is an input field vulnerable to SQL injection.</b></p>
 
@@ -12,13 +15,23 @@
   <button type="submit">Submit</button>
 </form>
 
+<form method="post" action="{{ url_for('sqli.sqli_reset') }}">
+    <button type="submit" style="margin-top:10px; background-color:dimgrey; color:white;">Reset Database</button>
+</form>
 {% if query %}
   <h3>Executed Query:</h3>
   <pre>{{ query }}</pre>
 {% endif %}
 
 {% if result %}
-  <h3>📄 Result:</h3>
+  <h3>Result:</h3>
+  {% if result is string %}
+    {% if result == "This query does not print anything" %}
+      <p>This query does not print anything.</p>
+    {% elif result.startswith("exception") %}
+      <p>{{result}}</p>
+    {% endif %}
+  {% else %}
   <table border="1">
     <tr><th>ID</th><th>Name</th><th>Role</th><th>Salary</th></tr>
     {% for row in result %}
@@ -30,6 +43,7 @@
       </tr>
     {% endfor %}
   </table>
+  {% endif %}
 {% endif %}
 
 <hr>
@@ -42,8 +56,13 @@
   <p>This lets you see all the employees</p>
   <li><code>Bob'; DROP TABLE employees;--</code> </li>
   <p>This lets you drop the table employees from the database</p>
+  <li><code>'; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --</code></li>
+  <p>This lets you add a new entry in the table. Try 2. to see the new entry.</p>
 </ol>
 
+<strong> For other input ideas, please refer to the <a href="{{ url_for('main.learn_sqli') }}#sql_statements" target="_blank">SQL Injection learn page</a> or
+    <a href="https://www.w3schools.com/sql/sql_injection.asp" target="_blank">this tutorial </a>
+ by w3Schools</strong>
 <hr>
 
 <h3>Why is this a risk?</h3>
@@ -62,7 +81,7 @@
 <br>
 <br>
 <h4 style="color: green;">Secure Alternative</h4>
-<p>However this can be solved by using parameterised Queries, queries with placeholders for user data:</p>
+<p>However this can be solved by using parameterised Queries aka queries with placeholders for user data:</p>
     <code>
   query = "SELECT * FROM employees WHERE name = ?"
   cursor.execute(query, (user_input,))

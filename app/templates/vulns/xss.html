@@ -4,17 +4,20 @@
 {% block content %}
 <h2>XSS Demo</h2>
 
+<div style="position: fixed; top: 0.5rem; right: 4.5rem; z-index: 1050;">
+  <a href="{{ url_for('main.learn_xss') }}" class="btn btn-warning">Back to Learn Page</a>
+</div>
 <p>
-  Below is a comment box.
-  <br>
+  Below is a comment box. It is vulnerable to <a href="{{ url_for('main.learn_xss') }}#reflected_xss" target="_blank">Reflected XSS.</a>
+  <br><br>
   The code takes user input from the comment box form and injects it directly into the page using an f-string.
-  This is dangerous because if a user submits malicious HTML or JavaScript—like <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>—it will be executed by the browser.
-  <br>
+  This is dangerous because if a user submits malicious HTML or JavaScript, such as <code>&lt;script&gt;alert('XSS')&lt;/script&gt;</code>, the browser will execute it.
+  <br><br>
   Try these scripts:
 </p>
 <ul>
   <li><code>&lt;script&gt;alert('XSS!')&lt;/script&gt;</code></li>
-  <li><code>&lt;img src=x onerror="alert('XSS')"&gt;</code></li>
+  <li><code>&lt;img src=x onerror="alert('XSS')"&gt;</code> (here x is the image source) </li>
 </ul>
 
 <form method="post">

@@ -30,4 +30,15 @@ def create_app(config_class=Config):
     from app.vulns.xss.routes import bp_xss
     app.register_blueprint(bp_xss)
 
+    from app.vulns.crypto_fail.routes import bp_crypto
+    app.register_blueprint(bp_crypto)
+
+    import base64
+
+    def b64decode_filter(encoded_str):
+        try:
+            return base64.b64decode(encoded_str).decode('utf-8')
+        except Exception:
+            return '[Invalid Base64]'
+    app.jinja_env.filters['b64decode'] = b64decode_filter
     return app

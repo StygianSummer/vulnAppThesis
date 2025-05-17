@@ -1,32 +1,50 @@
 {% extends 'base.html' %}
-{% block title %}What You Learned: XSS{% endblock %}
+{% block title %}XSS Summary{% endblock %}
 
 {% block content %}
-<h2>What You Learned: Cross-Site Scripting (XSS)</h2>
+<h2>Summary: Cross-site Scripting (XSS)</h2>
+<hr>
 
 <p>
-Definition
-</p>
+Cross-site scripting (XSS) is a web vulnerability that allows attackers to inject malicious scripts into websites. When viewed by users, the aforementioned malicious scripts can be used to steal private data, impersonate users, and modify the content of the page without the user’s knowledge.</p>
 
-<h3>Examples of Dangerous Input:</h3>
+<h4>There are 3 main types of XSS attacks, namely:</h4>
+<ul>
+  <li><strong>Reflected XSS:</strong> Here, an attacker injects malicious code onto a website through an input field. This input is reflected immediately in the response, and can be triggered when a user clicks on a crafted URL.</li>
+  <li><strong>Stored XSS:</strong> The malicious input in this type of XSS attack is stored on the server (such as in a database) and executed when any user opens the page affected by the script. This is the most dangerous type of XSS, as it can harm all users who visit the affected page.</li>
+  <li><strong>DOM-based XSS:</strong> The attack happens entirely on the client-side when JavaScript manipulates unsafe user input.</li>
+</ul>
+
+<h4>Demo: What went wrong?</h4>
+<ul>
+  <li>The user input was directly inserted into the HTML using an f-string.</li>
+  <li>No escaping or data validation was done on the input. This, in turn, allowed scripts to be executed.</li>
+</ul>
+
+<h4>Fixing the problem:</h4>
+<ul>
+  <li>User input should not be trusted. It is important to always sanitize and encode the input before rendering it on a page.
+</li>
+  <li>In the fix part of the demo, html.escape() was used to neutralize special characters in user input
+  </li>
+  </ul>
+
 <p>
-Examples of inputs and what they do
-</p>
+There are many ways to avoid different XSS scripting attacks.
+<i>For a more in depth understanding of this vulnerability, please consult the optional reading below.
+</i></p>
 
-<h3>How to Prevent XSS:</h3>
-<p>
-Add info
-</p>
+<h3>Optional Further Reading</h3>
+<ul>
+  <li><a href="https://portswigger.net/web-security/cross-site-scripting" target="_blank">PortSwigger - Cross-site scripting</a></li>
+  <li><a href="https://owasp.org/www-community/Types_of_Cross-Site_Scripting" target="_blank">OWASP – Types of Cross-site scripting</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">Wikipedia – Cross-site scripting</a></li>
+</ul>
 
-<h3>Learning objectives Completed:</h3>
-<p>To Write</p>
-
-<h4>Wanna learn more?</h4>
-<p>Here are a few resources <br> Add Links Here</p>
-<br>
-
+<hr>
 <div style="margin-top: 2rem;">
-  <a href="{{ url_for('xss.xss_demo') }}">← Back to XSS Demo</a>
-  <a href="{{ url_for('main.quiz_xss') }}" class="btn btn-primary" style="margin-left: 1rem;">Take Quiz</a>
+  <a href="{{ url_for('main.learn_xss') }}" class="btn btn-secondary">Back to Learn about XSS</a>
+  <a href="{{ url_for('xss.xss_demo') }}" class="btn btn-warning">Redo XSS Demo</a>
+  <a href="{{ url_for('xss.quiz') }}" class="btn btn-primary">Take the Quiz</a>
 </div>
 {% endblock %}

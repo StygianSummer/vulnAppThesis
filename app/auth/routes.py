@@ -1,5 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_user, logout_user, current_user
+from werkzeug.security import generate_password_hash
+
 from app.auth import bp
 from app import db
 from app.models import User
@@ -9,7 +11,7 @@ from datetime import datetime
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.dashboard'))
 
     form = LoginForm()
     if form.validate_on_submit():
@@ -25,7 +27,7 @@ def login():
 @bp.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.dashboard'))
 
     form = RegistrationForm()
     if form.validate_on_submit():
@@ -33,7 +35,11 @@ def register():
         if existing_user:
             flash('Username already exists.')
             return redirect(url_for('auth.register'))
-        user = User(username=form.username.data)
+        user = User(
+            username=form.username.data,
+            email=form.email.data,
+            password_hash=generate_password_hash(form.password.data)
+        )
         db.session.add(user)
         db.session.commit()
         flash('Registration successful! You can now log in.')

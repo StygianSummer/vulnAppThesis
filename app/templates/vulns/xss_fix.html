@@ -3,27 +3,28 @@
 
 {% block content %}
 <h2>Fix the XSS Vulnerability</h2>
+<div style="position: fixed; top: 0.5rem; right: 4.5rem; z-index: 1050;">
+  <a href="{{ url_for('main.learn_xss') }}" class="btn btn-warning">Back to Learn Page</a>
+</div>
 
-<p>To fix this vulnerability, the user input should be escaped so that special characters like <code>&lt;</code> and <code>&gt;</code> are not interpreted as HTML.
+<p style="background-color:lightcyan;">To fix this vulnerability, the user input should be escaped so that special characters like <code>&lt;</code> and <code>&gt;</code> are not interpreted as HTML.
   <br>
   One way to do this in Python is to use the <code>html.escape()</code> function, which replaces characters like <code>&lt;</code>, <code>&gt;</code>, and <code>&amp;</code> with safe HTML representations.
 </p>
 
 <p>
   Below is a vulnerable code snippet that displays user input directly on the page without escaping it.
-  Your task is to rewrite it using <code>html.escape()</code> to prevent XSS.
+  <br><br>
+  <b><i>Your task</i></b> is to rewrite it using <code>html.escape()</code> to prevent XSS. Feel free to consult <a href="https://www.geeksforgeeks.org/html-escape-in-python/" target="_blank">this page for reference.</a>
 </p>
-
-<h4>Vulnerable Code:</h4>
-<pre>
-from flask import request
-comment = request.form['comment']
-return f"&lt;p&gt;User said: {comment}&lt;/p&gt;"
-</pre>
-
 <hr>
-
-<form method="post">
+<h4>Vulnerable Code:</h4>
+<pre><code>from flask import request
+comment = request.form['comment']
+return <xmp>f"<p>User said: {safe_comment}</p>"</xmp></code></pre>
+<hr>
+<a id="result"></a>
+<form method="post" action="#result">
   <label for="code">Your Python code to fix it:</label><br>
   <textarea name="code" id="code" rows="8" cols="70" required>{{ code }}</textarea><br><br>
   <button type="submit" class="btn btn-primary">Submit Fix</button>
@@ -37,7 +38,21 @@ return f"&lt;p&gt;User said: {comment}&lt;/p&gt;"
     <p><strong>Example input:</strong> <code>&lt;script&gt;alert(1)&lt;/script&gt;</code></p>
     <p><strong>Escaped output:</strong> <code>{{ output }}</code></p>
   {% endif %}
-<strong>NOTE: There are many ways to protect against XSS attacks. For more information, follow the additional links in next page.</strong>
+{% if '✅' in feedback %}
+  <div class="mt-3">
+    <h5>✅ Example of a Safe Fix:</h5>
+    <pre><code>
+from flask import request
+import html
+
+comment = request.form['comment']
+safe_comment = html.escape(comment)
+return f"&lt;p&gt;User said: {safe_comment}&lt;/p&gt;"
+    </code></pre>
+  </div>
+{% endif %}
+
+<strong style="color: darkred;">NOTE: There are many ways to protect against XSS attacks and different XSS attacks to protect from. For more information, follow the additional links in the learn page.</strong>
 {% endif %}
 
 <a href="{{ url_for('xss.xss_demo') }}" class="btn btn-secondary mt-3">← Back to XSS Demo</a>

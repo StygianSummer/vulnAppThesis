@@ -2,31 +2,70 @@
 {% block title %}System Logs{% endblock %}
 
 {% block content %}
-<h2>System Logs</h2>
+<h1>Logs</h1>
 
-<h3> SQL Injection </h3>
-{% for log in logs.sqli %}
-  <pre>{{ log }}</pre>
-{% else %}
-  <p>No SQLi logs found.</p>
-{% endfor %}
+<p>Please press any of the options below to view the logs.</p>
+<div class="mb-3">
+  <button class="btn btn-danger" onclick="showLogs('sqli')">SQL Injection</button>
+  <button class="btn btn-warning" onclick="showLogs('xss')">XSS</button>
+  <button class="btn btn-info" onclick="showLogs('crypto')">Cryptography Failures</button>
+  <button class="btn btn-success" onclick="showLogs('quiz')">Quizzes</button>
+</div>
 
-<hr>
+<div id="logs-container">
 
-<h3>XSS </h3>
-{% for log in logs.xss %}
-  <pre>{{ log }}</pre>
-{% else %}
-  <p>No XSS logs found.</p>
-{% endfor %}
+  <div id="sqli" class="log-section" style="display:none;">
+    <h3>SQL Injection</h3>
+    {% for log in logs.sqli %}
+      <pre>{{ log }}</pre>
+    {% else %}
+      <p>No SQLi logs found.</p>
+    {% endfor %}
+    <hr>
+  </div>
 
-<hr>
+  <div id="xss" class="log-section" style="display:none;">
+    <h3>XSS</h3>
+    {% for log in logs.xss %}
+      <pre>{{ log }}</pre>
+    {% else %}
+      <p>No XSS logs found.</p>
+    {% endfor %}
+    <hr>
+  </div>
 
-<h3>Quizzes </h3>
-{% for log in logs.quiz %}
-  <pre>{{ log }}</pre>
-{% else %}
-  <p>No quiz logs found.</p>
-{% endfor %}
+  <div id="crypto" class="log-section" style="display:none;">
+    <h3>Cryptographic Failures</h3>
+    {% for log in logs.crypto %}
+      <pre>{{ log }}</pre>
+    {% else %}
+      <p>No Crypto logs found.</p>
+    {% endfor %}
+    <hr>
+  </div>
+
+  <div id="quiz" class="log-section" style="display:none;">
+    <h3>Quizzes</h3>
+    {% for log in logs.quiz %}
+      <pre>{{ log }}</pre>
+    {% else %}
+      <p>No quiz logs found.</p>
+    {% endfor %}
+    <hr>
+  </div>
+
+</div>
+
+<script>
+  function showLogs(type) {
+    const sections = document.querySelectorAll('.log-section');
+    sections.forEach(section => section.style.display = 'none');
+
+    const target = document.getElementById(type);
+    if (target) {
+      target.style.display = 'block';
+    }
+  }
+</script>
 
 {% endblock %}

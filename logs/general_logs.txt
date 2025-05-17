@@ -4,63 +4,63 @@ User: user
 Time: 2025-04-09 19:44:04.288213
 Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
 Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-09 19:47:41.644098
 Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
 Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-09 19:48:05.436908
 Query: SELECT * FROM employees WHERE name = ?
 Result: []
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-09 21:55:19.762872
 Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
 Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-09 21:55:59.130487
 Query: SELECT * FROM employees WHERE name = ?
 Result: []
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-09 22:00:49.153201
 Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
 Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-10 00:00:56.641798
 Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
 Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-10 00:01:14.904241
 Query: SELECT * FROM employees WHERE name = ?
 Result: []
-===============================
+================================
 
 ===== SQLI FIX ATTEMPT =====
 User: user
 Time: 2025-04-10 21:26:18.154740
 Submitted Fix: f"SELECT * FROM employees WHERE name = '{user_input}'"
 Secure: No
-=============================
+================================
 
 ===== XSS ATTEMPT =====
 User: user
@@ -167,7 +167,7 @@ q3: y
 q4: 
 q5_1: 
 q5_2: 
-q5_3: 
+q5_3:
 ================================
 
 ===== QUIZ SUBMISSION: SQLI =====
@@ -240,14 +240,14 @@ User: user
 Time: 2025-04-11 19:20:47.403859
 Query: SELECT * FROM employees WHERE name = ?
 Result: []
-===============================
+================================
 
 ===== SQLI ATTEMPT =====
 User: user
 Time: 2025-04-11 19:22:10.142272
 Query: SELECT * FROM employees WHERE name = ?
 Result: []
-===============================
+================================
 
 ===== QUIZ SUBMISSION: SQLI =====
 User: user
@@ -279,7 +279,3053 @@ User: user
 Time: 2025-04-11 19:53:44.696348
 Safe: True
 Code:
-from flask import request
-comment = html.escape(request.form['comment'])
+from flask import request
+
+comment = html.escape(request.form['comment'])
+
 return f"<p>User said: {comment}</p>"
+================================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-11 20:31:12.407419
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+================================
+
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-04-11 20:31:58.261287
+Query: SELECT * FROM employees WHERE name = ?
+Result: []
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 20:32:34.241387
+Score: 6/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: d
+q5_3: c
+================================
+
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-04-11 20:32:46.603201
+Score: 0/7
+q1: opt1
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+
+===== XSS ATTEMPT =====
+User: user
+Time: 2025-04-11 20:33:27.937734
+Comment: <script>alert('XSS!')</script>
+================================
+
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-04-11 20:34:02.798713
+Safe: True
+Code:
+Vulnerable Code:
+
+from flask import request
+
+comment = html.escape(request.form['comment'])
+
+return f"<p>User said: {comment}</p>"
+================================
+
+===== CRYPTOGRAPHIC FAILURE ATTEMPT =====
+User: user
+Time: 2025-05-04 17:57:46.300689
+Target Email: alice
+Password Guess: 1234
+Result: Failed
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-04 18:17:44.495888
+Used: base64(1) == None
+Result: fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-04 18:18:04.475098
+Used: base64(password123) == c2VjcmV0MTIz
+Result: fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-04 18:44:08.222109
+Used: plaintext: f == None | base64(f) == None
+Result: Plain=fail, B64=fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-04 18:47:08.173988
+Used: plaintext: secret123 == secret123 | base64(secret123) == c2VjcmV0MTIz
+Result: Plain=success, B64=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 18:03:59.008710
+Used: plaintext: secret123 == secret123 | base64(secret123) == c2VjcmV0MTIz
+Result: Plain=success, B64=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 18:06:52.406580
+Used: plaintext: secret123 == secret123 | base64(secret123) == c2VjcmV0MTIz
+Result: Plain=success, B64=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 18:19:47.077158
+Used: plaintext: secret123 == secret123 | base64(secret123) == c2VjcmV0MTIz
+Result: Plain=success, B64=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 19:19:37.460296
+Used: plaintext: passw0rd == passw0rd | base64(passw0rd) == cGFzc3cwcmQ=
+Result: Plain=success, B64=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 19:27:10.061688
+Used: User not found in database.
+Result: Plain=fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 19:27:24.821827
+Used: User not found in database.
+Result: Plain=fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 20:28:30.691282
+Used: plaintext: letmein == letmein
+Result: Plain=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 20:37:29.551991
+Used: base64(admin1) == YWRtaW4x
+Result: B64=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 22:36:54.861502
+Used: plaintext: letmein == letmein
+Result: Plain=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-05 22:37:08.026342
+Used: base64(admin1) == YWRtaW4x
+Result: B64=success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:34:59.581783
+Used: [plain] Username: diana, Password: qwerty, Expected: qwerty
+Result: Plain Result: success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:35:13.839253
+Used: [b64] Username: grace, Password: admin1, Encoded: YWRtaW4x, Expected: YWRtaW4x
+Result: B64 Result: success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:35:25.559739
+Used: [plain] Username: d, Password: d, Expected: None
+Result: Plain Result: fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:42:28.589719
+Used: [plain] Username: d, Password: s, Expected: None
+Result: Plain Result: fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:42:37.264784
+Used: [plain] Username: diana, Password: qwerty, Expected: qwerty
+Result: Plain Result: success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:42:51.074933
+Used: [b64] Username: grace, Password: admin1, Encoded: YWRtaW4x, Expected: YWRtaW4x
+Result: B64 Result: success
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:42:57.693894
+Used: [b64] Username: d, Password: fg, User not found.
+Result: B64 Result: fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:43:06.401194
+Used: [b64] Username: grace, Password: w, Encoded: dw==, Expected: YWRtaW4x
+Result: B64 Result: fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:43:19.935911
+Used: [plain] Username: diana, Password: d, Expected: qwerty
+Result: Plain Result: fail
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:43:36.602722
+Used: [hash] Input Password: diana, Hashed: $2b$12$Rec6GfX32Bl2nJwMfujwvepgkYk0S5kd/dbDUxdf0gk3nJAwp8Ece
+Result: Hash Result: Match
+================================
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 16:43:46.717393
+Used: [encrypt] Plaintext: diana, Key: BaiMAX1UIXdgMe1-6QV2BQUxPbTLaTRK5Q9MSSNRg_c=
+Result: Encrypted: gAAAAABoGb2yWHc_OE9BLt8rnWqdfHMy5Uzlq4SvRm2R3NQWolgsNg7bJsNnIKjNpTXi0m0FpjSoKmDXh5UMxuV6wTnW_X0NLw==, Decrypted: diana
+================================
+
+
+
+
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 19:45:39.240795
+Used: [hash] Input Password: a, Hashed: $2b$12$vq6Pdo.6pyOa2qZ9lzSHM.9GMD0hlfxxYhRDEUovBkWYbenmUjzu.
+Result: Hash Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 19:52:17.359226
+Used: [hash] Input Password: dad, Hashed: $2b$12$o4fbrwch4EBR4NIQAZ5nl.PqntJQ7XEultxhuvgLwN.25UbhnBihC
+Result: Stored for later comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 19:52:25.680188
+Used: [compare] Attempted Password: dad, Stored Hash: $2b$12$o4fbrwch4EBR4NIQAZ5nl.PqntJQ7XEultxhuvgLwN.25UbhnBihC
+Result: Hash Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:01:49.992593
+Used: [hash] Stored password: fan, Hashed: $2b$12$Fk/ML./uGA2CGFIhL.BBlO2ZRhXADZtn8A0fdhkjQXim2A6A5/N4e
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:05:55.141076
+Used: [hash] Stored password: j, Hashed: $2b$12$gXWiZ6c.sgXUXEqqPuvYPOpDOtaUetJsKB5DHU8Tmz3bYez9IyubS
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:06:08.147548
+Used: [compare] Attempted password: j, Hashed attempt: $2b$12$Eag62nKXU8F01CDPsBRGw.c6D90Jr90KFldEDocRdrRPtWTKAwSOO, Stored hash: $2b$12$gXWiZ6c.sgXUXEqqPuvYPOpDOtaUetJsKB5DHU8Tmz3bYez9IyubS
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:07:56.987712
+Used: [encrypt] Plaintext: f, Key: S0tf4a7N_YB-XHhqxfj6Zro0cUF3fvtHmEliEzEexyk=
+Result: Encrypted: gAAAAABoGe2MAvsEyA63GM2rJVWEK62POxroOSFvTUiZDArZRmt0_BBoGOyUqU1SslZZuvPc62BgOZWI_xMHyZ2CPj44vIX4Sg==, Decrypted: f
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:23:59.358282
+Used: [encrypt] Plaintext: hi, Key used: FGGPPMM_UjB2vchqwrhX_AbL9ZI9wFgWdCwhouL4UIo=
+Result: Encrypted: gAAAAABoGfFPmNt90JA2nXG9CCt3Xq52opuOEuyeS58nQ7xHvmu123Lm6Ze6hVp48sT1rcOmXAeU6S4Jr6GDOWXx4RzqW5kSJw==, Decrypted (valid): hi, Decryption (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:30:37.464420
+Used: [hash] Stored password: hi, Hashed: $2b$12$3tmtNIajkxUAHolBInOQoOISFTZU1zDcDAI58XalmeBnEN4sphSOW
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:30:44.596758
+Used: [compare] Attempted password: hi, Hashed attempt: $2b$12$uVEiz3WlDPQIgAU8MZfu1ejVyY0bqBcVWgWK22qu0mom4Mcr0vUZi, Stored hash: $2b$12$3tmtNIajkxUAHolBInOQoOISFTZU1zDcDAI58XalmeBnEN4sphSOW
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:31:06.670255
+Used: [encrypt] Plaintext: hi, Key used: KR4e69zjuJy-B5uoiJuO6ixRZs5qkFprH7a6SkHFnsQ=
+Result: Encrypted: gAAAAABoGfL6IIiUXKb5vVbLKtyEMQ9y7rIPMhEMSoKbNu5Mqs_rh3Ag2dOElOjyhLfu4suu7dtFYeXI02X6ByAo7vZDKx1H0w==, Decrypted (valid): hi, Decryption (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:35:56.555455
+Used: [encrypt] Plaintext: no, Key used: sh111_FoVFcHM4KTTJlQSOh9v4ZvnQ042yrVP6OTTWw=
+Result: Encrypted: gAAAAABoGfQcLI4ZlyUPRs-XBAnq-Daf-AzbKVGQjQX-SfC6MjUzWmQ7AKaq_i5erWUYBgHCSwEI0fTsclj86ED0rsNJOdIqNg==, Decrypted (valid): no, Decryption (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:38:22.782393
+Used: [encrypt] Plaintext: df, Key used: bQT-0FRYdwDb9Vp1-Ml5gt6N9TQXDFBemz3RHVyzJuA=
+Result: Encrypted: gAAAAABoGfSu4927UzApvS44as9qRhgKjgMZc6H1TXuYvh2Rq3Dd7YHm-hDy2wFfC6FanujQn8Cb304Zgm0aJ6a6pJted2REMg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:38:29.852574
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: df
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:38:35.793837
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 20:46:12.473645
+Used: [plain] Username: diana, Password: qwerty, Expected: qwerty
+Result: Plain Result: success
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-06 20:46:26.443538
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-06 20:46:34.458159
+Query: SELECT * FROM employees WHERE name = ?
+Result: [(1, 'Alice', 'Manager', 100000)]
+================================
+===== XSS ATTEMPT =====
+User: user
+Time: 2025-05-06 20:46:50.583294
+Comment: <script>alert('XSS!')</script>
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-06 20:47:20.876284
+Safe: True
+Code:
+html.escape
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-06 20:47:30.776977
+Safe: True
+Code:
+html.escape
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:06:53.954755
+Used: [hash] Stored password: w, Hashed: $2b$12$6GUDMPAsDYB7Nh2DfIgk7.eqR1ngC.c3AD5Sm9h39eREb/oGYlUqa
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:07:01.347488
+Used: [compare] Attempted password: e, Hashed attempt: $2b$12$a9ZI/dD/JoR6OBBwbdmyE.EJI.cY336pxwb21W3wM0x/gCd4ZwRAi, Stored hash: $2b$12$6GUDMPAsDYB7Nh2DfIgk7.eqR1ngC.c3AD5Sm9h39eREb/oGYlUqa
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:08:55.812340
+Used: [encrypt] Plaintext: df, Key used: lWfyV3HKF0UW6xgRqwyQDjlFWEUexk4zuZIOYjfMQ2g=
+Result: Encrypted: gAAAAABoGfvXL6Z8bwF0YuyNPAf00kLahHgDW95KAQ8I1L_a4_j5fLRSc-VCqyN22k1bDNmYmWW1IxqdOH00hNejrVlB1coPjA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:09:28.673443
+Used: [encrypt] Plaintext: as, Key used: S0FYEANKk_DN57zsL3sN2eFlpgm3AoEyQSKK96KkFrw=
+Result: Encrypted: gAAAAABoGfv4bYzYtvBMpEtpuwL2RRpEz_ezfTyx9EaCojx0GpX4aomoLYnU_xt3GKvXHI9V1sRK4x8MypSkKDW7_qsthsmN6A==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:09:31.941609
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: as
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:09:34.497853
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:12:32.840101
+Used: [encrypt] Plaintext: as, Key used: doB7GXgPotgaIZtd_kIhgV1YeAGzFwfq7naCp-V7a40=
+Result: Encrypted: gAAAAABoGfywG-1bE-Azml_ixncKboE72ElNzo9VORuSq8KUraiz8ZuEn_9kubPAQquZQGJaMn1vk6BlAeBDFQqvgmvqMMiBvA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:13:49.017434
+Used: [encrypt] Plaintext: d, Key used: zOqh-U-ZnMarRntSqTxxBSP3RehR7iSAuA_W5STtLO4=
+Result: Encrypted: gAAAAABoGfz93YCfxvijHd54U2-wzrDYrn6lit6ttsbxKwNBNd49j9DNB1u9wx6KiJx3ojsGgjiJjqDL1bwudn5UK47tcCJDXw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:13:52.816433
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:13:59.119372
+Used: [hash] Stored password: s, Hashed: $2b$12$dBL8T4AK1nYsQYRHuo73xeKn8tD4fc.2tMBU79bq18XL7KG7hzKGi
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:14:06.647097
+Used: [encrypt] Plaintext: dfian, Key used: fAN29Ew6g2oTMm-ElJONaLE8E6K5LNyLPkd7bEmtzkk=
+Result: Encrypted: gAAAAABoGf0OLJjYVC9XLzmJcL-m8t-h0spb4wcTYWkROPHNWCrecJ_njK9v3Pe1D2RQx8-D1oqHUbfxhLKtyV8-pjhT3u8pHw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:17:03.620459
+Used: [encrypt] Plaintext: sdf, Key used: gtWWVzt-2L2B9wV-Jhx24mDpt2HCkkCdd1cfFoAZCkI=
+Result: Encrypted: gAAAAABoGf2_SD9j28g26yxLuDa-lihiT05styO7Qd6NaH1zqYPEjhbudCx1vElfVn0Xr_XKl4kEITVQ5n2231qwFhHE8My70w==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:17:10.868125
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: sdf
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:17:42.605045
+Used: [encrypt] Plaintext: ad, Key used: gXqeKky3PYAup7i12IwUnXtO3BMPHbg8tlX9fwlydXI=
+Result: Encrypted: gAAAAABoGf3mnecZC-x3QLnTwye4fsPpSL1eFEBiSKgUC8MbbjmuK-ziv-26GpItFvR7aljQR46WMOannxAFFGYgtvF5-Zb2ew==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:21:47.941808
+Used: [encrypt] Plaintext: ghkk, Key used: j7jyhCXMmjeu_EFPiBc_CMFPJikMGj_v-7_FxDKgN9k=
+Result: Encrypted: gAAAAABoGf7bKzPi_zfPyp_FJLsm48KXRcv1HsVIdhUE1jr_sWraE2kV7RJHwdlw3D5DwQDmOB6hy6ef8nNMdtH2leKiBh9mfw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:22:13.226276
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: ghkk
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:22:15.320965
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:23:47.959805
+Used: [hash] Stored password: hi, Hashed: $2b$12$PRYRCXpG.TMY5qGUy1MtEes3AzX2phvdnBIOaO6YACIyVkHhtNGK2
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:23:55.509434
+Used: [hash] Stored password: hi, Hashed: $2b$12$Pd4lpNrpTwY9jEx830fhUeuagMf6t/I7yfh1Ef6ujOoDZ.CKgpysa
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:24:30.211532
+Used: [compare] Attempted password: cv, Hashed attempt: $2b$12$oG5TUoYzRVRk7AQDF6NoLuuTcqkHMuG9WVarutrYUNbMbhHpBaBue, Stored hash: $2b$12$Pd4lpNrpTwY9jEx830fhUeuagMf6t/I7yfh1Ef6ujOoDZ.CKgpysa
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:24:39.930443
+Used: [hash] Stored password: h, Hashed: $2b$12$s9.7kZpE.lDEFLvCenF3hOSsYHt.QI09p2oGPUmcvrhQii2iLM5qm
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:24:50.031791
+Used: [compare] Attempted password: nm, Hashed attempt: $2b$12$dGoUsWkrWLoQhQ7/HQamLudWjVdu1h54nQ/sIB0lFQL8uZ2HgV0CK, Stored hash: $2b$12$s9.7kZpE.lDEFLvCenF3hOSsYHt.QI09p2oGPUmcvrhQii2iLM5qm
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:25:53.670390
+Used: [hash] Stored password: hi, Hashed: $2b$12$O/N03wOiKNHCyJ.DNT5T0OlAlLMk9WERoHBnPOKy8txrY8UqhEpUS
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:28:35.714070
+Used: [hash] Stored password: hi, Hashed: $2b$12$hszCx5ZtS8r94aOBhMetzuL3TmCoKLhx/meAMi3esUfZzvXZpYJ4u
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:28:40.869138
+Used: [compare] Attempted password: w, Hashed attempt: $2b$12$VJBBUXmQmAgMhHNXxNf2JuGx2VtVDytFNKRF.emzzK1EbcOOOGvmS, Stored hash: $2b$12$hszCx5ZtS8r94aOBhMetzuL3TmCoKLhx/meAMi3esUfZzvXZpYJ4u
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:29:28.693548
+Used: [hash] Stored password: b, Hashed: $2b$12$euMJ7La85vN7jExcevsGkuAJarbrb05zn0AoDLLtQRfYSXVb1Hi72
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:30:24.714584
+Used: [hash] Stored password: nm, Hashed: $2b$12$6BjJUyhQpMDK8QRCoCy6IO8HdIzdE2tybx6.E3IsTKY1kVDw4Aq56
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:30:29.967112
+Used: [compare] Attempted password: nm, Hashed attempt: $2b$12$lfLYZy7T9qXIgrES9oyGm.XbmvYpf07Nm5zb79cMIsgSWxNFOPSuO, Stored hash: $2b$12$6BjJUyhQpMDK8QRCoCy6IO8HdIzdE2tybx6.E3IsTKY1kVDw4Aq56
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:33:30.962376
+Used: [plain] Username: alice, Password: secret123, Expected: secret123
+Result: Plain Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:33:43.695896
+Used: [b64] Username: grace, Password: admin1, Encoded: YWRtaW4x, Expected: YWRtaW4x
+Result: B64 Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:35:19.419764
+Used: [hash] Stored password: hi, Hashed: $2b$12$qgu/MaraDVj2q.mdBkqU3.kN7BrzJMRtmSZeYxZPs.qLQWdD.9kJi
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:35:23.845010
+Used: [compare] Attempted password: df, Hashed attempt: $2b$12$8vBPIO6Ct7NfXlz/7diaAO9iq12PyyiBGQ35sbYJx6iCs7Hyxlb2S, Stored hash: $2b$12$qgu/MaraDVj2q.mdBkqU3.kN7BrzJMRtmSZeYxZPs.qLQWdD.9kJi
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:35:31.198554
+Used: [encrypt] Plaintext: sn, Key used: VoHaIjDLW9PdU63aLhmcm-tBKtFaGGmMjwxySMM-IKI=
+Result: Encrypted: gAAAAABoGgITzA6MQCl_tASZazdXdH2cLFbL0wtME3t92Sl6QKe7Z_Pj4fgo5KNVV2ITx30hccglI1kFR3RfaDwwza8xXLtvow==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:35:35.083976
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: sn
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:36:06.023306
+Used: [encrypt] Plaintext: df, Key used: SqblK1CSzb1muGQx-bzhlenhZV1ccldE_sASKVB4eoU=
+Result: Encrypted: gAAAAABoGgI25fNewwLSlE7lSS9H6d2GcUn2nehypWr7Vj4jnix1gC2qWuY6XqQi8zBIWZWVuCpMVUnh0_mE523vuQ4mw51pSw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:36:08.585200
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: df
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:36:10.656249
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-06 21:38:08.879718
+Safe: False
+Code:
+idk
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-06 21:38:13.624903
+Safe: False
+Code:
+idk
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-06 21:38:15.999328
+Safe: False
+Code:
+idk
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-06 21:38:34.178640
+Used: [plain] Username: e, Password: f, Expected: None
+Result: Plain Result: fail
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-06 21:45:25.051915
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-06 21:46:00.328097
+Score: 7/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: a
+q5_2: b
+q5_3: c
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-09 18:23:09.358182
+Score: 7/7
+q1: opt2
+q2: opt1
+q3: x
+q4: x
+q5_1: A
+q5_2: B
+q5_3: C
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-09 18:30:40.312525
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:42:59.054910
+Used: [plain] Username: d, Password: f, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:43:14.651108
+Used: [b64] Username: r, Password: f, User not found.
+Result: B64 Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:43:22.907513
+Used: [plain] Username: r, Password: r, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:44:19.132059
+Used: [plain] Username: sd, Password: d, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:44:26.684255
+Used: [b64] Username: f, Password: g, User not found.
+Result: B64 Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:44:32.941222
+Used: [hash] Stored password: d, Hashed: $2b$12$MUiGErd45rtzw6A9c5dJnucwTk0MywKPjiZro8kslfiytBC9o5yHW
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:46:05.605315
+Used: [hash] Stored password: d, Hashed: $2b$12$YHGsSGLlmLeglNAlbR9lFu27ZITCKTKNTCeu.fTNqCGge8dFbauu6
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:46:34.963956
+Used: [hash] Stored password: d, Hashed: $2b$12$O6CnJfqWrlKqfEQFWjWZjOQZTBLDWysHd91AhSPpn4mJ5h4MNrDAO
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:46:44.795368
+Used: [compare] Attempted password: d, Hashed attempt: $2b$12$6HJhO5JuOfelwe9/i0xjv.RFHzl7rDWjB2uTfLQyU57zpiyMzJRLO, Stored hash: $2b$12$O6CnJfqWrlKqfEQFWjWZjOQZTBLDWysHd91AhSPpn4mJ5h4MNrDAO
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:46:56.981423
+Used: [encrypt] Plaintext: s, Key used: nUH-Q8yqm-e6wdq3G6zf0osVlXVi_4MbGUFM07vakX4=
+Result: Encrypted: gAAAAABoHyCQpXpqr-yHQ0W5eNdIdrWY8OCM1rsNzmzWI6bcSp-gAMppTGACs-s7KbWUIs5Zjtim3yawqX9WJ3z-81kvWpp-XQ==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:47:02.695979
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: s
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-10 18:47:05.297779
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-11 20:17:40.013857
+Safe: True
+Code:
+html.escape
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-11 20:26:18.943837
+Safe: True
+Code:
+html.escape
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-11 20:30:35.131082
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:17:56.681379
+Used: [plain] Username: m, Password: m, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:33:08.527981
+Used: [b64] Username: d, Password: f, User not found.
+Result: B64 Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:37:35.746989
+Used: [hash] Stored password: f, Hashed: $2b$12$nATVvydZbl9Hxzr5vlXjuegPvQxCmKEFuEd..WJnjbNaNiObh1HXC
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:37:41.446991
+Used: [compare] Attempted password: f, Hashed attempt: $2b$12$BZgC.eGk5o5psd85ODuxfOpB6coWa8qEzS3CE3u3AdZAvcwhlCDzu, Stored hash: $2b$12$nATVvydZbl9Hxzr5vlXjuegPvQxCmKEFuEd..WJnjbNaNiObh1HXC
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:44:18.162712
+Used: [hash] Stored password: d, Hashed: $2b$12$RTmNy2t7ylUTPn1amvsei.fpFGV/i.Poh4785p.dCKE1GVNfIfS62
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:46:23.236131
+Used: [hash] Stored password: d, Hashed: $2b$12$kVdoLmJkUz0RN6wPqhmaP.HTEwwz98qbTlLqbervop9Sc/xZvIIFm
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:46:38.316576
+Used: [compare] Attempted password: d, Hashed attempt: $2b$12$SQFKoL1XLX/Sot7GRYx4EuZkJg1wf9cIcS3LcGKEniq7VIknPzCVy, Stored hash: $2b$12$kVdoLmJkUz0RN6wPqhmaP.HTEwwz98qbTlLqbervop9Sc/xZvIIFm
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:47:30.228743
+Used: [hash] Stored password: s, Hashed: $2b$12$b1GBpUAwk3dJzR5RuJLuIOvGqPUxcmzoBw8v6nkpbRq/b9mHRS7h2
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:47:35.299985
+Used: [compare] Attempted password: s, Hashed attempt: $2b$12$BKT1p60hfhSVvDLqWWjvkuvR1ZGYASaOrzBeRC6R5k4ga1KH7VoGe, Stored hash: $2b$12$b1GBpUAwk3dJzR5RuJLuIOvGqPUxcmzoBw8v6nkpbRq/b9mHRS7h2
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:56:02.530621
+Used: [hash] Stored password: d, Hashed: $2b$12$rX1FOhX3HA1L9JcvYQjDO.0farQHzSTwq6o1RwS8AZmuQNJWnCOEG
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:56:09.956808
+Used: [compare] Attempted password: d, Hashed attempt: $2b$12$uX1lf4d69EE4CEBOTJnlLeW2mlj1mAltlKST3Pf8fAiH1bMf.EL1O, Stored hash: $2b$12$rX1FOhX3HA1L9JcvYQjDO.0farQHzSTwq6o1RwS8AZmuQNJWnCOEG
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:56:59.270238
+Used: [hash] Stored password: s, Hashed: $2b$12$c3A/gPdjyek9vXM6wXR5jOHUjCC184TBceH/jHV5qdTeIQbyMO9Du
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:57:06.232143
+Used: [compare] Attempted password: s, Hashed attempt: $2b$12$3HV5HPfN8OX/fUZl3U7/autNNw7PtTwITUYsPsZbFjzlnusIqH/oy, Stored hash: $2b$12$c3A/gPdjyek9vXM6wXR5jOHUjCC184TBceH/jHV5qdTeIQbyMO9Du
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:57:40.835025
+Used: [compare] Attempted password: s, Hashed attempt: $2b$12$qArJHPRX61FrplwVw2mPZONdFCJ.PLwYiM4CgtIC45hytLOc2.wHG, Stored hash: $2b$12$c3A/gPdjyek9vXM6wXR5jOHUjCC184TBceH/jHV5qdTeIQbyMO9Du
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:59:01.025807
+Used: [hash] Stored password: n, Hashed: $2b$12$DAzVgzZiem9WZEVq2CbzuOVWth.qOxLoeGf75i7s6gdKc4fRwRwFe
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:59:04.190741
+Used: [compare] Attempted password: n, Hashed attempt: $2b$12$S3on0fcVHvJcsZUI1sTrK.h4pjtthb1X0sXOQadrsCmLHfjFk.bim, Stored hash: $2b$12$DAzVgzZiem9WZEVq2CbzuOVWth.qOxLoeGf75i7s6gdKc4fRwRwFe
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 22:59:40.397452
+Used: [compare] Attempted password: n, Hashed attempt: $2b$12$QUbinCUdOT8fuie5iu0WBOi9BWrRLF7qp5H/kdakGkKvnQacdYvFG, Stored hash: $2b$12$DAzVgzZiem9WZEVq2CbzuOVWth.qOxLoeGf75i7s6gdKc4fRwRwFe
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 23:00:19.935827
+Used: [compare] Attempted password: n, Hashed attempt: $2b$12$yaGPOct/UY79qXiI02RK3uOYIgps0CYhmeiIy/MWspY6hb.BrV3he, Stored hash: $2b$12$DAzVgzZiem9WZEVq2CbzuOVWth.qOxLoeGf75i7s6gdKc4fRwRwFe
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-11 23:00:46.693113
+Used: [compare] Attempted password: n, Hashed attempt: $2b$12$fg0Bg5QwyIc2Om9HWAMj8ep7D.Um/IUATkcrDQr8.UrvMW88wSe0i, Stored hash: $2b$12$DAzVgzZiem9WZEVq2CbzuOVWth.qOxLoeGf75i7s6gdKc4fRwRwFe
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 00:26:51.409823
+Used: [encrypt] Plaintext: w, Key used: mLPVOg9MgvBDW2fT3ieVBNo1WPTlLfUv08BKvbwQeDw=
+Result: Encrypted: gAAAAABoIMG7D23J0--o7V1_2i-_lVgQPRG1yDET3mIN4GXoepyBNei_WZQflXTcQP8lopxH8QKbW-59QsNAMgeGLEanGrMPyw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:27:04.055808
+Used: [encrypt] Plaintext: f, Key used: 23xukePF-oN7zTMshXfn2hbgp4h2CDv0uUn7H4yIBVQ=
+Result: Encrypted: gAAAAABoIM_YnsN65gxSZFim1d7bSDvZq6hkgFecYSpW0KBrwAQY5z_sc3xOWN5Bc06DrPWvvpeJBwhEuX49Fb0bL093yCrcwA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:27:21.349333
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:29:50.727792
+Used: [encrypt] Plaintext: d, Key used: Dpx-1yXHf11HV2hwrs_9t91rfML4DhrfTN2-lXtQGAg=
+Result: Encrypted: gAAAAABoINB-7M4cV-6nsiVRCCi-kiXzqN38NS4v5v9XcAG8GDxs7r0aYzv7he9Mf-JYWXVvvsNeluhKqjWj1pLiyrzTTsGSAA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:32:50.334132
+Used: [encrypt] Plaintext: d, Key used: TIt7KT3rZoASoKz5L0wxnKWODZ9tGc6WBXr_1LYgYQU=
+Result: Encrypted: gAAAAABoINEypsHmcCw911bQ-PfFx-w-xwgZ_yq9Bq_HFMCINk5iguAwzdqLE53Te7CXyMOJGNgDS3wDCRKNVU_hxazukStKaA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:32:58.251420
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:34:51.711672
+Used: [encrypt] Plaintext: a, Key used: y5E9x1N8hlFnc_bHajoEbDIlDgdVa6793k5aC2KaYh8=
+Result: Encrypted: gAAAAABoINGrMAja7_TCD6EgfHfLcusTu_8i89uoHIl_pC1gI9OiNb1DfWDjpMKWD1KBMUREeZpHYHOKYQ1Ry02jh4qRcMLHfg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:34:56.174619
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: a
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:35:01.037139
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:36:36.509382
+Used: [encrypt] Plaintext: a, Key used: 8V6lUo7RxhZPj_7v2upwkl9W-LYh7p4WdPwHtOI0Oes=
+Result: Encrypted: gAAAAABoINIUvC9zYiYqtua9AR72qkMO5TZhgIdeLi1f2XoN7ph43PbdkkjU6i0cGAJWo0fhnukSKnq6My-CoemWCxvF1nJoMw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:36:48.287434
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: a
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:36:59.948942
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:38:13.111544
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:38:20.218044
+Used: [encrypt] Plaintext: n, Key used: HyyBdwDKc_n4tjhyC7vl_8ur8A8f3QKzggzHAt_e7G0=
+Result: Encrypted: gAAAAABoINJ8xqEbFAh-W58jH3K6LZpEjjdThulu-cbGwXLJwnlVciL9VM4PS3n8wc5RqOg-yNTbL5IssjWulAFVDnu2MNCCLg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:38:23.285266
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: n
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:38:29.546055
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:43:15.739443
+Used: [encrypt] Plaintext: da, Key used: 9ub19LffftmPXE1GmGxmVmim3jFB07ZO14Ba9b5fFx8=
+Result: Encrypted: gAAAAABoINOj47TK-k05hJP8nKgwTDas_rI9rrj6R1bi1uDWBOi08gckFd8y_j2MbiWvPg-slQM6pCWsd2hh93Zt1M_7yB5iHA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:43:21.214591
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: da
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:44:41.687899
+Used: [encrypt] Plaintext: m, Key used: -N-4Ae95_H8uWWTHiBitQ7y7dtgRlZXyu0VqIhyqqBk=
+Result: Encrypted: gAAAAABoINP5oOQ8hjYUG3gDpHeEf5EcJ2Er2HEkMMhQwha2OA0fUezAs0hw8ojUmeO2mhwAdVBWi1rKWaoEqw2KzS5-IoJu5w==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:44:50.226991
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: m
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:45:00.412234
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:46:29.811635
+Used: [encrypt] Plaintext: s, Key used: lsoJNjrY1csm4RGvLv7VnCfJkTXXwWKC4LE3e1FRmn0=
+Result: Encrypted: gAAAAABoINRlw14cC_9c0QJkdywEDSjdCJ2FL8p_f10_5gBlF1sPLYw5R1aG8OAulsmIMqRwtg-fw_s2uyjcrrqbe5ui4acVhw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:46:33.407596
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:49:35.548013
+Used: [encrypt] Plaintext:  k, Key used: o7oZsqFTFtKL3Of94-3Pebmb4jtVyGvYR3HGhPiMsbo=
+Result: Encrypted: gAAAAABoINUf-if9-fhdtOPAwtU28ZA2RqCpE7UTysNYblfsgz5irecW7bWbAJbAW_UUrkND3KMOFJ9HQASCAUgcFQ5sqBvRjw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:49:40.257654
+Used: [decrypt] Decryption with correct key
+Result: Decrypted:  k
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:49:44.456899
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:51:11.730932
+Used: [encrypt] Plaintext: m, Key used: 9LigYbC-osWL4s5dRZa_XHVQcTixG65lAxsLxUq3DzA=
+Result: Encrypted: gAAAAABoINV_g9st6BwpbpyQLXnVu5M9-Yu6TpVZkanMQWMuN4BtYgVu4gk4_Q6HeCSzhN9QXXSNwDqJkyOIj-8nDF4w-Uvd8g==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:51:14.788798
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: m
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:51:23.777479
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:52:25.405133
+Used: [encrypt] Plaintext: d, Key used: MRxBdivIgbwPXWo-B13LyCLrtgu6y_2AjSlAZZKpHjI=
+Result: Encrypted: gAAAAABoINXJG_C-xb1qU46B_OWqYC-ovYGXNczUmgxmX34JzN-pfjEPNLLgEh8htoxRBT15zAbTxc8nisZ8k_Y_EO4iXzxmJg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:52:28.170218
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:52:31.794858
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:53:01.248626
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:53:10.686464
+Used: [encrypt] Plaintext: d, Key used: ZX1RIqboyjgkI7QREek6upLsxVEDK9QHcmLSzbUN84U=
+Result: Encrypted: gAAAAABoINX2ZCb2TYC6GPK7y4gFKLbvCRzGVvibbJsaQXJMFQl-I1sVY-JbhmHvZgMGnyUG-ZMBaigKkWiJcIqxBlpgarn1Ug==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:53:12.866087
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:53:46.072079
+Used: [encrypt] Plaintext: d, Key used: a018Ol_3cUKrPGks300Ek8pUM0prxlt2mFOQyRnoI20=
+Result: Encrypted: gAAAAABoINYabDgk6FXpZ6NzHU7mdYGHROSe7fCNHixKFk9DDnd7sxNcTFI2vM2o030CoSP-InNhZawEIMYxqWBI2hC5wMktrg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:53:49.638106
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:53:54.859496
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:55:03.988567
+Used: [encrypt] Plaintext: f, Key used: DP2vRIPFhkCWtGbO34Rhf7Z53goY-bGeGlRRN7eNASg=
+Result: Encrypted: gAAAAABoINZn_ly04k1nsGtpHyKDVo5Ygfep7PutwQ9tNso2DT2kIy_e0VFi7PqgGxJUHNzXNclS2NTzIDkmHy7ZzIpgITxeUA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:55:08.482558
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: f
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:55:17.338007
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:55:36.045347
+Used: [encrypt] Plaintext: e, Key used: CgtDbebZ-P5-Va7PIYNv-i-waR1f5uI1YyL_Hpb_q-U=
+Result: Encrypted: gAAAAABoINaIt9jco0QkY9ta7SOerEmXDB8GmuUx0ZnGSrzE1gV9m3xyYJZFV0S-Jh5KnBr3cRuTNFDTJ_OSltINpYts-r7_Bw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:55:39.182476
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: e
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:56:33.370120
+Used: [encrypt] Plaintext: d, Key used: IIWLQo0BavoYl77m-N8g4iPAxdVYAcgFr88bwViCmXo=
+Result: Encrypted: gAAAAABoINbBXWZxaG_Yjnp4TmsrOj43p2ZBjlakZLEM4yDyM0JUgJB_YRSntSGsOT8uSvtnF3mItK5VJ5Jvql8ZsuJRGXoYww==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:56:36.735039
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:56:42.468309
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:56:57.804029
+Used: [encrypt] Plaintext: d, Key used: otfQ0iL0_vDWSaSp953N6UBDQhOMIZ0RilL7Thsf1SA=
+Result: Encrypted: gAAAAABoINbZI-zuwvIVBd4E7THXhZ--6GKyqUoYkB9sRW6Xsc4SIy-mPbLOGKnBJHPBZ5T_nOU-ao62MFSXizY7FEIFT_PGRA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:57:01.011586
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:58:26.408130
+Used: [encrypt] Plaintext: f, Key used: COHzL3k-fl03NEGHMVQuMqyn-VjqiFurKXks_NdOqQg=
+Result: Encrypted: gAAAAABoINcyXooIkThPLz1Lftq5Rl-SAgdCV9tYFjoZWu2MGkEYAfN-KjCfCQi2PGPPqs_NTz7fKTbukk7uJe4Lbk-UG1Vc0Q==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:58:31.749912
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: f
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:58:39.566859
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 01:58:49.460416
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:00:51.084872
+Used: [encrypt] Plaintext: d, Key used: RvTPmyh6PBVMQWEuTH9ZfKA3PExvr6RVonG3U3rXs7c=
+Result: Encrypted: gAAAAABoINfDYBrAESDYpj-_kwczzU0-UiyBmJAFAx3WJIkAP44PPgvzQ0Fo1yLZFo8KMyGFfLLbqcKZNnjkGeHVlTPR97mBZQ==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:00:54.573611
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:00:59.333827
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:01:36.170761
+Used: [encrypt] Plaintext: d, Key used: rI1jnsNyk_-D-m9TOKMm-Wz6_U0i2gBUFayJs60uN3o=
+Result: Encrypted: gAAAAABoINfwRf-SLULIrUHQX7XyjLtBsq_TdaVLNpa7GDmGy67-jGZvHspKymqcc17v2AZ0OKAI1543PncL3oVPSTe9j-vreQ==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:01:39.357194
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:01:42.962481
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:02:25.616300
+Used: [encrypt] Plaintext: s, Key used: -sx9GNOQ-weLoNYz1QGmeIxTzqBYo7CTKropibx81AE=
+Result: Encrypted: gAAAAABoINghbMzO8OXv1gtvGx-gTvA1TIobkdrxqXuMMVJ1OkUFQb9HJOkfb-Osi18Q6r3jfA0veBaTSXUmq6eqdy4lYafsWA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:02:28.838282
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: s
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:02:31.702826
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:02:38.673458
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:02:59.482142
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:04:18.357445
+Used: [encrypt] Plaintext: s, Key used: 1cjNHcXLErGC8Ry6l4X8xyGFs_SC8Yh27orxwgpnW4s=
+Result: Encrypted: gAAAAABoINiSkFRQho25OquOOhIaNTF1x2a46-QxfElwWAJ43F5eQhrNVIZ3qKB0WFvROoBpe0Cd8N8fBpUum2u81oXLOfgn_A==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:04:21.792444
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: s
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:04:24.226147
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:09:28.141508
+Used: [encrypt] Plaintext: a, Key used: VZkYnALjmpSGMiCjIhFsYN4QWtmfUqVxDXZBV7i4_sQ=
+Result: Encrypted: gAAAAABoINnIxXoFQsL_FIbCs3pbbHzRuZpC7F7a0a4wdW-re8UQrAShmIO7eBtRJ7zrwWUEOtxB3wnSs_sKQn04nEu5Gq7qEA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:09:31.316699
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: a
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:09:36.362154
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:11:24.006917
+Used: [encrypt] Plaintext: am, Key used: FbeI3Rnd1l-G15EOl3LxVRYfvxgo1WvfxGxWjAfinR0=
+Result: Encrypted: gAAAAABoINo8u1eNm-2CkQICL1W99Ivn3pvXiLE0N6H2oeujIznE3_eIvhh7i96NxTTllTLKW5l1KI8i8_je3BFNB-JJ6VFQcA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:11:26.805509
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: am
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:11:42.098208
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: am
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:11:44.577240
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: am
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:11:47.716579
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:12:13.016194
+Used: [encrypt] Plaintext: s, Key used: Gz0Tnli3YtLhd3_IFRbvk2yIr71zu7oRJGi8P4nM3tU=
+Result: Encrypted: gAAAAABoINpt8ahMnlrmhOkRlN3_w4TFlnFeG2pDOY8MIeG43QDUx9rzrIqsUg5WtBB9wFbU53gJ6M8aNN9vb13RIwvfILWILg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:12:16.304862
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: s
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:15:27.672253
+Used: [encrypt] Plaintext: d, Key used: Cw3UOYei3wANFMjXp7apogkx0qBRMRPby76Ek0Fu80I=
+Result: Encrypted: gAAAAABoINsv6KyQiQuy1MgylBFJbopelQLn1T-17lvhqE4wNbIKCNIP7_eHBN6vIfQEtJZjcDrCHrxEPk-3RjtHQ2x-dKvewQ==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:22:31.322395
+Used: [encrypt] Plaintext: d, Key used: H5Sdk4HAiNetQlCBx1cPL1RGM-aVG5PSiou8VM5FH4g=
+Result: Encrypted: gAAAAABoINzXGCkleg7ol-qAnjwRiDtFHq55PfOOUqj7fDdB001Ur1F6KirQKI_MMXtAxxoZtYR-CUZajDCNb6nySOCMe55F-g==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:22:34.390498
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:22:44.622203
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:26:53.297956
+Used: [encrypt] Plaintext: a, Key used: v1QeidFcMD4eb1-dm2uEFeJkkwmqbsABXfVsgcZ4X2A=
+Result: Encrypted: gAAAAABoIN3dYbe_jBTEDmgaURgNKscpuwMQGNsVRAKx82k7i4t3WWginqG7ngDKxa-RGTXH43xj8iv8MGqGsbhiB9k0TRquOA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:26:56.266773
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: a
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:27:01.489827
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:27:39.618293
+Used: [encrypt] Plaintext: sf, Key used: t468aSJjNmlD1sDf4ZdI_C6Nyiu44UvkoU3wBwThreM=
+Result: Encrypted: gAAAAABoIN4LqGrLL4ah4sgofM42F68_XX6yyZg3he3EmlPXwpmBw6ydBSpnuPxNDrFI8-0zrHVSGklxj0FSkOEdP6bhXYUi9g==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:27:41.617718
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: sf
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:27:46.327523
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:29:22.729737
+Used: [encrypt] Plaintext: sdddddd, Key used: 3e48aRjkUe5hRnrbrOmB6WLIYgNP4_PQutyWNs3i82g=
+Result: Encrypted: gAAAAABoIN5yzI6LVkC9zUXFP2PNj9tDrNEDQ7k2D6rFdyrhA5STR8GPeIcvlTy2GF45aDsk1o54mHU5tLbjt4RE0u6PTNLYKA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:29:31.126795
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: sdddddd
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:29:37.092148
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:30:47.150974
+Used: [encrypt] Plaintext: as, Key used: eNYJnV9LPCyLUshYZKaCJmZIF84nhXvO8FQEexIjoM4=
+Result: Encrypted: gAAAAABoIN7HBtYeaiEgBZwQj2EAUVIuXwPjjQ26IdeZp80QOzNpC-AVlPUkyiMFOyA18YZ6-rQRZEdUDjd9d7O8VSZ3UTzWPg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:30:50.619373
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: as
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-12 02:30:53.626963
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:49:20.955019
+Query: SELECT * FROM employees WHERE name = 'Bob'; DROP TABLE employees;--'
+Result: ['You can only execute one statement at a time.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:49:28.276020
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:50:13.230590
+Query: SELECT * FROM employees WHERE name = 'Bob'; Insert into TABLE employees Mal'
+Result: ['You can only execute one statement at a time.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:50:19.948706
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:54:13.380330
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, department, salary) VALUES ('Hacker', 'IT', 99999); --'
+Result: ['You can only execute one statement at a time.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:58:16.281593
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:58:22.728272
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 20:58:51.531509
+Query: SELECT * FROM employees WHERE name = 'alice'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:02:38.195156
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:04:58.144573
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:05:03.704364
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:08:22.371948
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:08:41.760732
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: ['You can only execute one statement at a time.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:08:55.698951
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000), (6, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:09:37.319542
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: ['You can only execute one statement at a time.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:11:02.576146
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000), (6, 'Hacker', 'Attacker', 100000), (7, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:11:12.738280
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: ['You can only execute one statement at a time.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:19:05.511324
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 100000), (2, 'Bob', 'Engineer', 85000), (3, 'Charlie', 'Intern', 30000), (4, 'Dave', 'Engineer', 88000), (5, 'Eve', 'CTO', 150000), (6, 'Hacker', 'Attacker', 100000), (7, 'Hacker', 'Attacker', 100000), (8, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:19:26.186784
+Query: SELECT * FROM employees WHERE name = ''; UPDATE employees SET salary = 99999 WHERE 1=1; --'
+Result: ['You can only execute one statement at a time.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:21:00.996831
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 99999)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:21:04.428384
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 99999), (2, 'Bob', 'Engineer', 99999), (3, 'Charlie', 'Intern', 99999), (4, 'Dave', 'Engineer', 99999), (5, 'Eve', 'CTO', 99999), (6, 'Hacker', 'Attacker', 99999), (7, 'Hacker', 'Attacker', 99999), (8, 'Hacker', 'Attacker', 99999)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:21:08.353234
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: You can only execute one statement at a time.
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:23:37.437472
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: ['SELECT executed but no data returned.']
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:25:29.411664
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: You can only execute one statement at a time.
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:28:27.216895
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: You can only execute one statement at a time.
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:29:55.472094
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:30:00.751326
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:30:04.833850
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:32:59.334018
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:33:01.920746
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:36:23.320347
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: []
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:37:50.413083
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:37:55.172373
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: exception
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:38:03.395692
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:38:12.327345
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: exception
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:38:15.913521
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:38:20.065164
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:38:24.710135
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:38:33.302424
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: exception
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:39:51.023580
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:39:54.664465
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: exception
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:39:59.468854
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 80000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:40:04.512456
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:41:05.201974
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:41:08.593884
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Hacker', 'Attacker', 100000), (5, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:41:11.011517
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:15.201116
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:19.966117
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:21.460160
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:25.164005
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:28.971579
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:32.796765
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:43.326767
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:47.537376
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Hacker', 'Attacker', 100000), (5, 'Hacker', 'Attacker', 100000), (6, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:43:50.304468
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:44:01.124797
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:47:11.771871
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:48:06.519245
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:48:08.420840
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:48:11.926289
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:48:16.547447
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:48:21.367520
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000), (6, 'Hacker', 'Attacker', 100000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:48:35.384925
+Query: SELECT * FROM employees WHERE name = 'Bob'; DROP TABLE employees;--'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:58:33.406715
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:58:58.637877
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:59:04.195593
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 21:59:07.133163
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:01:40.829619
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:03:01.712693
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:04:11.129517
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:07:32.919703
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:09:44.538420
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:09:49.049534
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:09:54.514955
+Query: SELECT * FROM employees WHERE name = 'Bob'; DROP TABLE employees;--'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:09:58.108278
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:10:01.823805
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:10:07.037522
+Query: SELECT * FROM employees WHERE name = 'Bob'; DROP TABLE employees;--'
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:10:09.488689
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:10:17.266937
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:10:20.862071
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:10:22.187026
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: user
+Time: 2025-05-13 22:10:25.453758
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 80000)]
+================================
+===== XSS FIX ATTEMPT =====
+User: user
+Time: 2025-05-13 22:26:07.370905
+Safe: False
+Code:
+d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:06:12.410666
+Used: [encrypt] Plaintext: hi hon, Key used: MJQAsJtDgyxET7eoE441PF3Kq7EsTRteBoE4IwhwjNc=
+Result: Encrypted: gAAAAABoI230UCbqp8Koj6UzKuE-D07G3qu5iHnGFQYpX05avUXlhAy7eRhBjvGjfNJtp92AAwlqayimUOSKMdcqRtxBM8G27A==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:06:17.567139
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: hi hon
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:06:32.180041
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:06:45.946730
+Used: [encrypt] Plaintext: shi, Key used: LanIUfzvdaU2GgjBuT5iCcgvTsnx1bfz1jJw7Xq2rkM=
+Result: Encrypted: gAAAAABoI24VXZQ7NEKz_6PRTR65J5iC1673mX5JnMSfc_dJFSh7mTcmAVVX4b_q9blUXOGihiiIzwVeny9jfI2tqawyNPPcMg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:06:55.431947
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: shi
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:06:57.996271
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:07:15.750295
+Used: [hash] Stored password: huo, Hashed: $2b$12$5duKBHAoCySwgaANcK618eS5AciKKrNW5VXJLc4Or60P5PpNe/SFi
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:07:24.240113
+Used: [compare] Attempted password: huo, Hashed attempt: $2b$12$9eOjxmBrEbvXEbDO8Szute6SkYVv7y7rUKBjiGImP5MDjqEC7NhXS, Stored hash: $2b$12$5duKBHAoCySwgaANcK618eS5AciKKrNW5VXJLc4Or60P5PpNe/SFi
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:09:11.207165
+Used: [encrypt] Plaintext: hi, Key used: f1gdsnl7AP6Hjy6nm3nE8aSusJeOkgik-N4fEkLdPpA=
+Result: Encrypted: gAAAAABoI26nLZsk5rvoA5AWtDcuQaWEXWl2njdzo0asZbPIgqaIFub0uR5917P2JsXf8PmzofEcs6imnPh83e96CHLXu08_vg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:11:41.389190
+Used: [encrypt] Plaintext: hi hon, Key used: t4av1HpVMPGUXkHq2_k8SowyClSXHnZEZRcFSx6o9N0=
+Result: Encrypted: gAAAAABoI289G1pnceouhxkFBYBo8Ile8vL9bmv6M_2Ckn1voyHuFX9Z9NTwAonSZXwQLR1pf3giwW3Tt5i0bqABULepCw1HeA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:12:10.437345
+Used: [encrypt] Plaintext: f, Key used: fYCMLfVzNQlZGMJyig8CtSfZS85xeJCUPhs6g8XSYmo=
+Result: Encrypted: gAAAAABoI29a74R16nVqIVbUkV_UJvLKzsdsssjt2is_lP8vnPZfSmADpHtW026KS5ISERL6c5eLfOTID1hkvLbcQqZhPY4SAA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:18:35.407114
+Used: [encrypt] Plaintext: fun, Key used: mCs8KuN_mGWfqWxjgaQHaDP3G-k7KkN92h9PhNz-0SU=
+Result: Encrypted: gAAAAABoI3Dbj_Txfvgk4KD7lPtzODWHovumXQIYMZolenwQJ5H6QYy_CaKVqi4E8eRKvgm2RERQzAFuv9HU0yJ1BvVGA-jXRg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:18:41.281524
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: fun
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:21:46.563308
+Used: [encrypt] Plaintext: hio, Key used: Sp2aAgmFyKf4DBAiOs5FG1kyuDyD4qZFhmuD-GDRcfo=
+Result: Encrypted: gAAAAABoI3Ga_YFaLEfLavz8zM7rIBp7Q9gTWq6uDsPpubURdOiS-GEFghPC88Vsm8gVip8kP6D2-TfTEWg3U2kI8fbHGRaIcQ==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:21:55.301530
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: hio
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:22:33.507414
+Used: [encrypt] Plaintext: hio, Key used: 4LgmGP4ekizCab9KkrVvWy-VxMJ-euw0l1l2ceVj1Yo=
+Result: Encrypted: gAAAAABoI3HJ_VUI_A8tXy1bBd0a2GZQINil5mDlbc-1Lg-me_YTLe6997zcd1XXr-ZQ4xy9dQxewx3b265wgeVQg-fgRxRQAg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:25:19.236440
+Used: [encrypt] Plaintext: s, Key used: wmu5pAlXbUt6RgoPXlma0xjHi9qPZfsj40oLxWL9g0M=
+Result: Encrypted: gAAAAABoI3JvwkKSVfO2GcoKWpOTG_3r5KqqotlJszU3wlSpZIknhHDzF9xPcYV-4KxLptFNC6NCEv0PEgq8x7iHh-0PDf4g-Q==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:25:31.074766
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: s
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:25:45.181987
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:26:14.777974
+Used: [hash] Stored password: non, Hashed: $2b$12$xcDtQgnlOPO0vwyqdKhloOrQ1Hns6s0foHQWfMm2b7lKi0G5OVGOu
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:26:21.437404
+Used: [compare] Attempted password: no, Hashed attempt: $2b$12$Danv97KJWH2IcoUfCvo5euUhPn5aeluLB6rtIIqKlKohFBsKjNy7G, Stored hash: $2b$12$xcDtQgnlOPO0vwyqdKhloOrQ1Hns6s0foHQWfMm2b7lKi0G5OVGOu
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:26:27.875319
+Used: [hash] Stored password: non, Hashed: $2b$12$spzn.G0Q8cbDp1quU5pkFO70I/SquaxusmQEQ5nJWoxbOchrDaKK2
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:26:32.710405
+Used: [compare] Attempted password: non, Hashed attempt: $2b$12$rTzYi55LZrQZX3n.NVyuZug8Xd6AFLpnRIOl8axJGnjrTqLIML2p2, Stored hash: $2b$12$spzn.G0Q8cbDp1quU5pkFO70I/SquaxusmQEQ5nJWoxbOchrDaKK2
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:27:25.262676
+Used: [encrypt] Plaintext: d, Key used: qKDUdtaqaBPLmfrKoRs7jtQm4lNaw2TLH2b4SJ3F27E=
+Result: Encrypted: gAAAAABoI3Ltq7NpdLy1piQOa6TVfOJKT9cPhnHGt8Xqw6JIm-HApY4KQMKwYnpuerIhuXnOC2Qnz_KAxa-jrzSp_pteH19Tnw==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:27:28.256897
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:28:09.947247
+Used: [encrypt] Plaintext: skd, Key used: wt9of6CwUAFq6l_X24m8qJKfaXuAIFcyjY6Xes_kKHA=
+Result: Encrypted: gAAAAABoI3MZI8HthJloKwNcFsS2aYeAG07MKx54jvPVYe-uoHyaa1pt26Bv5yDB1zjDbbnuwZoNcej9Bhq_YRnbOp-C6BWBcA==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:28:12.731587
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: skd
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:29:28.099329
+Used: [encrypt] Plaintext: d, Key used: DHP8SxyccE_VLXiJLV1epma1G118HThFDQgRaWnAz5s=
+Result: Encrypted: gAAAAABoI3NoCvz5N_x5YIn1c3_yqpZpBKWFGAmBGV0jluLj_xzTKnzqxSZoFqlqZ8NLloTSyTve6wD0usbRetXNSRd40qsi8Q==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:29:30.727314
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: d
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:29:33.392897
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:30:27.543523
+Used: [encrypt] Plaintext: hi, Key used: HVx3mjeiE9mczirKiNCQhcCCjF4LWFnF_oaMkE8cZQ8=
+Result: Encrypted: gAAAAABoI3OjFjvJyy2EvND0LMfHqG3FtxPNhYBnXqBzm-i7b0Bu_Ej1kLfJ_QX7HZeaV2Op2K4a__I33UEkd97s_8Pmw_fuCg==
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:30:30.184141
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: hi
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 01:30:42.345553
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:53:14.320557
+Used: [plain] Username: alice, Password: secret123, Expected: secret123
+Result: Plain Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:53:54.162255
+Used: [plain] Username: fg, Password: g, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:55:11.106864
+Used: [plain] Username: alice, Password: secret123, Expected: secret123
+Result: Plain Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:56:01.578243
+Used: [b64] Username: grace, Password: admin1, Encoded: YWRtaW4x, Expected: YWRtaW4x
+Result: B64 Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:57:19.111716
+Used: [plain] Username: alice, Password: add, Expected: secret123
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:58:53.750627
+Used: [plain] Username: m, Password: m, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:59:17.410384
+Used: [plain] Username: alice, Password: secret123, Expected: secret123
+Result: Plain Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 16:59:24.395340
+Used: [plain] Username: d, Password: f, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:00:00.628512
+Used: [plain] Username: alice, Password: secret123, Expected: secret123
+Result: Plain Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:00:38.704325
+Used: [plain] Username: s, Password: d, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:00:48.113310
+Used: [plain] Username: d, Password: f, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:00:58.558687
+Used: [plain] Username: f, Password: f, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:01:19.570700
+Used: [b64] Username: grace, Password: s, Encoded: cw==, Expected: YWRtaW4x
+Result: B64 Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:01:57.051994
+Used: [plain] Username: a, Password: s, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:02:33.413315
+Used: [plain] Username: s, Password: d, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:04:44.982225
+Used: [b64] Username: grace, Password: admin1, Encoded: YWRtaW4x, Expected: YWRtaW4x
+Result: B64 Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:05:13.749220
+Used: [plain] Username: s, Password: d, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:05:55.433710
+Used: [plain] Username: s, Password: d, Expected: None
+Result: Plain Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 17:06:03.955220
+Used: [b64] Username: d, Password: f, User not found.
+Result: B64 Result: fail
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-14 23:14:17.803859
+Used: [encrypt] Plaintext: a, Key used: DXn15_E0foBQS-9OFVfRPcCZ1zRuXff8DCqlI2vFmnQ=
+Result: Encrypted: gAAAAABoJKU5T-Bti8HQK4kOkjif4JycIGdHCRW_d_cn0dUNm2kOYcUJxJnJTHVAceh27RdSgXZsNZPGcT7gnyVHmrvPxzUcmQ==
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-15 00:00:56.178217
+Score: 4/7
+q1: c
+q2: a
+q3: a
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: D
+================================
+===== QUIZ SUBMISSION: XSS =====
+User: user
+Time: 2025-05-15 00:29:44.379474
+Score: 0/7
+q1: a
+q2: C
+q3: None
+q4: B
+q5_1: a
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: CRYPTO FAILURES =====
+User: user
+Time: 2025-05-15 00:43:35.897698
+Score: 0/7
+q1: b
+q2: d
+q3: c
+q4: 1c2b3b4salt5ACB
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: CRYPTO FAILURES =====
+User: user
+Time: 2025-05-15 00:49:16.089537
+Score: 3/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: A
+q5_2: C
+q5_3: b
+================================
+===== QUIZ SUBMISSION: CRYPTO FAILURES =====
+User: user
+Time: 2025-05-15 00:49:21.187802
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: XSS =====
+User: user
+Time: 2025-05-15 01:05:25.180221
+Score: 5/7
+q1: c
+q2: None
+q3: Z
+q4: stOred
+q5_1: B
+q5_2: C
+q5_3: A
+================================
+===== QUIZ SUBMISSION: XSS =====
+User: user
+Time: 2025-05-15 01:07:05.018056
+Score: 6/7
+q1: c
+q2: stoRed
+q3: Z
+q4: B
+q5_1: B
+q5_2: c
+q5_3: a
+================================
+===== QUIZ SUBMISSION: XSS =====
+User: user
+Time: 2025-05-15 01:08:38.925516
+Score: 1/7
+q1: a
+q2: 1c2stoRed3z5bca
+q3: None
+q4: B
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-15 01:10:42.702691
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: C
+q5_2: B
+q5_3: A
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 14:15:16.093881
+Score: 0/19
+q1: 
+q2: None
+q3: None
+q4: None
+q5_a: None
+q5_b: None
+q5_c: None
+q6: None
+q7: None
+q8_a: None
+q8_b: None
+q8_c: None
+q9: None
+q10: None
+q11: None
+q12: 
+q13: None
+q14: None
+q15: None
+================================
+
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:19:40.170236
+Score: 0/19
+q1: 
+q2: None
+q3: None
+q4: None
+q5_a: None
+q5_b: None
+q5_c: None
+q6: None
+q7: None
+q8_a: None
+q8_b: None
+q8_c: None
+q9: None
+q10: None
+q11: None
+q12: 
+q13: None
+q14: None
+q15: None
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:22:14.520588
+Score: 12/19
+q1: xss
+q2: b
+q3: d
+q4: b
+q5_a: None
+q5_b: None
+q5_c: None
+q6: c
+q7: c
+q8_a: None
+q8_b: None
+q8_c: None
+q9: a
+q10: c
+q11: b
+q12: dom
+q13: b
+q14: b
+q15: b
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:24:26.894827
+Score: 12/19
+q1: xss
+q2: b
+q3: d
+q4: b
+q5_a: None
+q5_b: None
+q5_c: None
+q6: c
+q7: c
+q8_a: None
+q8_b: None
+q8_c: None
+q9: a
+q10: c
+q11: b
+q12: dom
+q13: b
+q14: b
+q15: b
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:26:06.756658
+Score: 12/19
+q1: xss
+q2: b
+q3: d
+q4: b
+q5_a: None
+q5_b: None
+q5_c: None
+q6: c
+q7: c
+q8_a: None
+q8_b: None
+q8_c: None
+q9: a
+q10: c
+q11: b
+q12: dom
+q13: b
+q14: b
+q15: b
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:26:19.113824
+Score: 12/19
+q1: xss
+q2: b
+q3: d
+q4: b
+q5_a: None
+q5_b: None
+q5_c: None
+q6: c
+q7: c
+q8_a: None
+q8_b: None
+q8_c: None
+q9: a
+q10: c
+q11: b
+q12: dom
+q13: b
+q14: b
+q15: b
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:31:50.901043
+Score: 0/19
+q1: 
+q2: None
+q3: None
+q4: None
+q5_a: None
+q5_b: None
+q5_c: None
+q6: None
+q7: None
+q8_a: None
+q8_b: None
+q8_c: None
+q9: None
+q10: None
+q11: None
+q12: 
+q13: None
+q14: None
+q15: None
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:32:23.034431
+Score: 0/19
+q1: 
+q2: None
+q3: None
+q4: None
+q5_a: None
+q5_b: None
+q5_c: None
+q6: None
+q7: None
+q8_a: None
+q8_b: None
+q8_c: None
+q9: None
+q10: None
+q11: None
+q12: 
+q13: None
+q14: None
+q15: None
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:34:32.177411
+Score: 3/19
+q1: 
+q2: None
+q3: None
+q4: None
+q5_1: b
+q5_2: c
+q5_3: a
+q6: None
+q7: None
+q8_1: b
+q8_2: c
+q8_3: a
+q9: None
+q10: None
+q11: None
+q12: 
+q13: None
+q14: None
+q15: None
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 16:35:20.152362
+Score: 6/19
+q1: 
+q2: None
+q3: None
+q4: None
+q5_1: b
+q5_2: c
+q5_3: a
+q6: None
+q7: None
+q8_1: b
+q8_2: c
+q8_3: a
+q9: None
+q10: None
+q11: None
+q12: 
+q13: None
+q14: None
+q15: None
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-16 16:50:46.923200
+Used: [hash] Stored password: n, Hashed: $2b$12$3JvAcwqbQfX/qDSfRsfvWu43pOtnXkeCs/WGoMRSjoESPW56oamle
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-16 16:50:51.552158
+Used: [compare] Attempted password: d, Hashed attempt: $2b$12$mad/ixzd94c3j170HYF3M.wDtg.iFc4zbC.XtmsiliyOP.rgFojYO, Stored hash: $2b$12$3JvAcwqbQfX/qDSfRsfvWu43pOtnXkeCs/WGoMRSjoESPW56oamle
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-16 16:50:57.909647
+Used: [hash] Stored password: d, Hashed: $2b$12$kxYDCjlG7qdvmSf47EjemeBHJIPETfj9P20g9SLnOvh.DZNmbmAVu
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-16 16:51:02.285495
+Used: [compare] Attempted password: d, Hashed attempt: $2b$12$qEVLAPNELgiQRtM3ZNtdde6nOwR4QifW1QeaRBLXP6eaygteIjIxy, Stored hash: $2b$12$kxYDCjlG7qdvmSf47EjemeBHJIPETfj9P20g9SLnOvh.DZNmbmAVu
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-16 16:52:20.137294
+Used: [compare] Attempted password: d, Hashed attempt: $2b$12$nNLz.slfmwXRFes3cE8M0O2oE0yIXYeIDyJy.JRwre2vt4QUAYprW, Stored hash: $2b$12$kxYDCjlG7qdvmSf47EjemeBHJIPETfj9P20g9SLnOvh.DZNmbmAVu
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: user
+Time: 2025-05-16 16:53:08.968360
+Used: [compare] Attempted password: d, Hashed attempt: $2b$12$P.GDxznFqkUQgjJgxhGogu8ig5//3/s2E0AyScmB.qlLI2YiAF8bC, Stored hash: $2b$12$kxYDCjlG7qdvmSf47EjemeBHJIPETfj9P20g9SLnOvh.DZNmbmAVu
+Result: Comparison Result: Match
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 17:32:31.660264
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:44:33.469578
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: b
+q5_3: a
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:45:22.447294
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: A
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:47:04.656927
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:48:38.316248
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: a
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:50:24.461937
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: a
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:51:37.609225
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: a
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:53:16.219790
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: a
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:53:36.127693
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: a
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:53:41.086497
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: user
+Time: 2025-05-16 22:54:03.863451
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: prepared
+q5_1: c
+q5_2: B
+q5_3: a
+================================
+===== QUIZ SUBMISSION: XSS =====
+User: user
+Time: 2025-05-16 22:54:52.111264
+Score: 7/7
+q1: c
+q2: stoRed
+q3: Z
+q4: B
+q5_1: b
+q5_2: c
+q5_3: a
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: user
+Time: 2025-05-16 22:55:03.944529
+Score: 0/19
+q1: 
+q2: None
+q3: None
+q4: None
+q5_1: 
+q5_2: 
+q5_3: 
+q6: None
+q7: None
+q8_1: 
+q8_2: 
+q8_3: 
+q9: None
+q10: None
+q11: None
+q12: 
+q13: None
+q14: None
+q15: None
+================================
+===== QUIZ SUBMISSION: XSS =====
+User: user
+Time: 2025-05-16 22:57:04.079300
+Score: 7/7
+q1: c
+q2: stoRed
+q3: Z
+q4: B
+q5_1: b
+q5_2: c
+q5_3: a
+================================
+===== QUIZ SUBMISSION: CRYPTO FAILURES =====
+User: user
+Time: 2025-05-16 22:57:54.599024
+Score: 7/7
+q1: c
+q2: b
+q3: b
+q4: salt
+q5_1: A
+q5_2: C
+q5_3: b
+================================
+===== QUIZ SUBMISSION: CRYPTO FAILURES =====
+User: user
+Time: 2025-05-16 22:58:57.044780
+Score: 7/7
+q1: c
+q2: b
+q3: b
+q4: salt
+q5_1: A
+q5_2: C
+q5_3: b
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:36:29.371899
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 80000)]
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:38:35.071621
+Query: SELECT * FROM employees WHERE name = '' OR 1=1--'
+Result: [(1, 'Alice', 'Manager', 80000), (2, 'Bob', 'Developer', 65000), (3, 'Charlie', 'Analyst', 60000), (4, 'Rom', 'CEO', 1000000), (5, 'Betty', 'Intern', 60000)]
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:38:55.378670
+Query: SELECT * FROM employees WHERE name = 'Bob'; DROP TABLE employees;-- '
+Result: This query does not print anything
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:39:04.167956
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:39:14.880969
+Query: SELECT * FROM employees WHERE name = ''; INSERT INTO employees (name, role, salary) VALUES ('Hacker', 'Attacker', 100000); --'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:39:19.148857
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: exception: no such table: employees
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:39:22.498935
+Query: RESET DATABASE
+Result: Reset successful
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:39:25.397998
+Query: SELECT * FROM employees WHERE name = 'Alice'
+Result: [(1, 'Alice', 'Manager', 80000)]
+================================
+===== SQLI ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:40:55.886795
+Query: SELECT * FROM employees WHERE name = ?
+Result: [(1, 'Alice', 'Manager', 80000)]
+================================
+===== QUIZ SUBMISSION: SQLI =====
+User: hjkhjk
+Time: 2025-05-16 23:44:48.582142
+Score: 7/7
+q1: c
+q2: c
+q3: b
+q4: parameterized
+q5_1: C
+q5_2: B
+q5_3: A
+================================
+===== XSS ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:49:29.885101
+Comment: <script>alert('XSS!')</script>
+================================
+===== XSS ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:49:44.215782
+Comment: <img src=x onerror="alert('XSS')">
+
+================================
+===== XSS FIX ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:51:19.072493
+Safe: True
+Code:
+html.escape()
+================================
+===== QUIZ SUBMISSION: XSS =====
+User: hjkhjk
+Time: 2025-05-16 23:54:18.494694
+Score: 7/7
+q1: c
+q2: Stored
+q3: Z
+q4: B
+q5_1: B
+q5_2: C
+q5_3: A
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:57:24.317868
+Used: [encrypt] Plaintext: hoi, Key used: K0rVQw3YvtzMpxw9X6k237147fpT7dp2APOwp2H42Es=
+Result: Encrypted: gAAAAABoJ1JUn0ISzEgyqGyIi_ju32fDggjOR6c20vWPf-Vk1ZUmzEcc3xTsceNLTMwiIZRkq2LqMAY7ihaVnkwH_BRDsaHUHQ==
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:57:33.909624
+Used: [decrypt] Decryption with correct key
+Result: Decrypted: hoi
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:57:40.495173
+Used: [decrypt_wrong] Attempted decryption with wrong key
+Result: Decryption failed (wrong key): 
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:58:52.088575
+Used: [hash] Stored password: koi, Hashed: $2b$12$0samou1LFB//vIUe1d7YnenpOWIRLUjt7v18P/QIw.WX93uIrCMt6
+Result: Saved hash for future comparison
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:59:08.823955
+Used: [compare] Attempted password: <img src=x onerror="alert('XSS')">, Hashed attempt: $2b$12$SDbBN8QLjWzFPVb8onLrceJbOe92stMXkLn42sXTRcc4pH1GQ3d0q, Stored hash: $2b$12$0samou1LFB//vIUe1d7YnenpOWIRLUjt7v18P/QIw.WX93uIrCMt6
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:59:33.999854
+Used: [compare] Attempted password: $2b$12$0samou1LFB//vIUe1d7YnenpOWIRLUjt7v18P/QIw.WX93uIrCMt6, Hashed attempt: $2b$12$WZeD0P/b/Xp1vsoho4tuHeu3wEsbq4UfpnwCnhXdX5czbsvkdXzGK, Stored hash: $2b$12$0samou1LFB//vIUe1d7YnenpOWIRLUjt7v18P/QIw.WX93uIrCMt6
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:59:39.669035
+Used: [compare] Attempted password: $2b$12$0samou1LFB//vIUe1d7YnenpOWIRLUjt7v18P/QIw.WX93uIrCMt6, Hashed attempt: $2b$12$j0/qN8jVF/P3bGKWcjRig.LCpDDCOMXCCSM195aGgTSkTqfc2q792, Stored hash: $2b$12$0samou1LFB//vIUe1d7YnenpOWIRLUjt7v18P/QIw.WX93uIrCMt6
+Result: Comparison Result: No match
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-16 23:59:50.556310
+Used: [compare] Attempted password: koi, Hashed attempt: $2b$12$c//X1yBa5L.ItHTs.NkG5.DUMAacDKhsTEM4cWvQZscZFNVoLkFIe, Stored hash: $2b$12$0samou1LFB//vIUe1d7YnenpOWIRLUjt7v18P/QIw.WX93uIrCMt6
+Result: Comparison Result: Match
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-17 00:01:03.755130
+Used: [plain] Username: diana, Password: qwerty, Expected: qwerty
+Result: Plain Result: success
+================================
+===== CRYPTO ATTEMPT =====
+User: hjkhjk
+Time: 2025-05-17 00:01:55.807027
+Used: [b64] Username: grace, Password: admin1, Encoded: YWRtaW4x, Expected: YWRtaW4x
+Result: B64 Result: success
+================================
+===== QUIZ SUBMISSION: CRYPTO FAILURES =====
+User: hjkhjk
+Time: 2025-05-17 00:04:42.733576
+Score: 4/7
+q1: a
+q2: b
+q3: b
+q4: salt
+q5_1: a
+q5_2: b
+q5_3: c
+================================
+===== QUIZ SUBMISSION: CRYPTO FAILURES =====
+User: hjkhjk
+Time: 2025-05-17 00:05:56.582300
+Score: 0/7
+q1: None
+q2: None
+q3: None
+q4: 
+q5_1: 
+q5_2: 
+q5_3: 
+================================
+===== QUIZ SUBMISSION: FINAL QUIZ =====
+User: hjkhjk
+Time: 2025-05-17 00:12:33.860844
+Score: 16/19
+q1: 
+q2: b
+q3: d
+q4: a
+q5_1: B
+q5_2: c
+q5_3: a
+q6: d
+q7: c
+q8_1: b
+q8_2: c
+q8_3: a
+q9: a
+q10: c
+q11: b
+q12: dom
+q13: b
+q14: b
+q15: b
+================================
+===== XSS ATTEMPT =====
+User: user
+Time: 2025-05-18 01:21:05.011315
+Comment: <img src="app/static/images/mwhahaha.png" onerror="alert('XSS')">
 ================================

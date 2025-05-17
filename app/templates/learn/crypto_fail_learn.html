@@ -1,11 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>crypto fail learn</title>
-    <h2>Crypto_fail learn</h2>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Learn About XSS{% endblock %}
+{% block content %}
+<h1>Cryptographic Failures</h1>
+    <div class="section">
+        <p><b><i>Cryptographic failures</i></b> are vulnerabilities where sensitive data like passwords, credit card numbers, or personal information is not properly protected. This could be due to the web application using bad encryption, no encryption, or misusing encryption tools.
+        </p><p>Attackers can now target, steal and misuse this unprotected data. This is the <i>root cause</i> of sensitive data exposure.</p>
+    </div>
 
-</body>
-</html>
+    <h2>The Danger</h2>
+    <div class="section">
+        <p>If encryption systems of an application are weak or used incorrectly, attackers can do things including but not limited to:</p>
+        <ul>
+            <li>Break the encryption and steal private data. </li>
+            <li>Cause data breaches, identity theft or fraud.</li>
+            <li>Obtain unauthorized access to user accounts.</li>
+        </ul>
+    </div>
+    <hr>
+    <h2>How they occur</h2>
+    <div class="section">
+        <p>Here are potential causes of cryptographic failures:</p>
+        <ul>
+            <li>Using old or broken encryption algorithms.</li>
+            <li>Sending data over the internet without encryption (such as over HTTP).</li>
+            <li>Storing passwords using weak protection.</li>
+            <li>Reusing or poorly managing encryption keys.</li>
+            <li>Not checking security certificates properly.</li>
+            <li>Letting programming flaws leak sensitive data that can be exploited.</li>
+        </ul>
+    </div>
+    <hr>
+    <h2>Preventing Cryptographic Failures</h2>
+    <p>Preventing Cryptographic Failures is a task that requires multiple steps. Some include:</p>
+    <h3>Knowing What Needs Protection</h3>
+    <div class="section">
+        <ul>
+            <li>Identify the sensitive data your app collects.</li>
+            <li>Protect it in accordance to regulations (like GDPR) or standards (like PCI-DSS).</li>
+        </ul>
+    </div>
+
+    <h3>Avoiding Common Mistakes</h3>
+    <div class="section">
+        <ul>
+            <li>Don’t send sensitive data in plain text over the internet (use HTTPS, not HTTP).</li>
+            <li>Don’t use outdated or weak encryption tools.</li>
+            <li>Don’t reuse encryption keys or store them in code.</li>
+            <li>Don’t skip certificate checks (i.e. make sure that secure connections are truly secure).</li>
+            <li>Don’t use insecure random number generators or insecure encryption settings.</li>
+        </ul>
+    </div>
+
+    <h3>Using Proper Encryption</h3>
+    <p>For this step, ensure that:</p>
+    <div class="section">
+        <ul>
+            <li>Encrypt all sensitive data at rest (when stored) and in transit (when sent).</li>
+            <li>Use strong, up-to-date encryption algorithms and tools.</li>
+            <li>Enforce HTTPS with HSTS headers.</li>
+            <li>Never store passwords in plain text. Use strong hashing such as:</li>
+            <ul>
+                <li>bcrypt</li>
+                <li>scrypt</li>
+                <li>Argon2</li>
+                <li>PBKDF2</li>
+            </ul>
+            <li>Avoid insecure hash functions (like MD5 or SHA1).</li>
+            <li>Use authenticated encryption to keep data both encrypted and verified.</li>
+        </ul>
+    </div>
+    <p>For more information and detailed explanations about this topic, please look at the optional further reading linked below.</p>
+
+    <hr>
+
+    <h2>Example Attack Scenarios</h2>
+    <div class="section">
+        <div class="scenario">
+            <strong>Scenario 1:</strong> A site stores encrypted credit card numbers but decrypts them automatically when retrieved. If a hacker finds an <a href="{{ url_for('main.learn_sqli') }}"  target="_blank">SQL injection</a> flaw, they could get the card numbers in plain text.
+        </div>
+        <br>
+        <div class="scenario">
+            <strong>Scenario 2:</strong> A website doesn’t use HTTPS. A Hacker on public Wi-Fi can spy on users, steal their login cookies, and hijack their accounts.
+        </div>
+        <br>
+        <div class="scenario">
+            <strong>Scenario 3:</strong> Passwords are stored with weak or no hashing. A file upload flaw allows an attacker to retrieve the password database. A hacker uploads a file, gets access to the password database, and uses pre-made tables (rainbow tables) to crack all the passwords quickly.
+        </div>
+    </div>
+
+<hr>
+<h2>Optional Further Reading</h2>
+<ul>
+  <li><a href="https://owasp.org/Top10/A02_2021-Cryptographic_Failures/" target="_blank">OWASP – A02:2021 Cryptographic Failures</a></li>
+  <li><a href="https://www.pentestpeople.com/blog-posts/owasp-top-ten-cryptographic-failures" target="_blank">Pentest People – OWASP Top Ten: Cryptographic Failures</a></li>
+  <li><a href="https://medium.com/@ajay.monga73/cryptographic-failures-understanding-and-preventing-vulnerabilities-91c8b2c56854" target="_blank">Medium – Understanding and Preventing Cryptographic Failures</a></li>
+    <li><a href="https://cloud.google.com/learn/what-is-encryption"> Google Cloud – What is Encryption?</li>
+    <li><a href="https://en.wikipedia.org/wiki/Hash_function"> Wikipedia – Hashing</a></li>
+</ul>
+
+<hr>
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('main.learn') }}" class="btn btn-secondary mt-3">← Back to all vulnerabilities</a>
+  <a href="{{ url_for('crypto_fail.crypto_fail_fix') }}" class="btn btn-success mt-3">Try Cryptographic Failures Demo</a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,245 @@
+{% extends 'base.html' %}
+{% block title %}Fixing Cryptographic Failures{% endblock %}
+
+{% block content %}
+<div style="position: fixed; top: 0.5rem; right: 4.5rem; z-index: 1050;"
+     xmlns:margin-top="http://www.w3.org/1999/xhtml">
+  <a href="{{ url_for('main.learn_crypto') }}" class="btn btn-warning">Back to Learn Page</a>
+</div>
+<h1> Cryptographic Failures</h1>
+
+<p>
+  This vulnerability exists because passwords and sensitive data were stored without any proper cryptographic protection.
+  Cryptographic failures include:
+</p>
+<ul>
+  <li>Storing passwords in plaintext or weak encodings like Base64.</li>
+  <li>Using outdated or broken algorithms (e.g., MD5, SHA1).</li>
+  <li>Encrypting sensitive data improperly (e.g., no key management, no TLS).</li>
+</ul>
+
+<hr>
+
+<h2>What Should You Do?</h2>
+<p> The learn page talked about avoiding cryptographic failure using encryption and hashing. Below is an elaboration on how they work.</p>
+<h3>1. To Protect Sensitive User Data → <strong>Encryption Across Devices</strong></h3>
+
+<p>
+  Imagine you're securely sending personal data (like credit card info or a love note) from your device (Device 1) to another device (Device 2). You’ll encrypt the message using a shared secret key, and the server will decrypt it. This is called <strong>symmetric encryption</strong> — both devices use the same key.
+</p><p>
+  There exists also asymmetric encryption which you can learn about in the additional reading linked here.
+</p>
+
+<p>
+  Below, you can simulate how this works — including what happens when the key is wrong.
+</p>
+
+<h4>Step 1: Device 1 Encrypts the Message</h4>
+<p>
+  Enter any sensitive information. When you click "Encrypt with Device 1," the system will:
+</p>
+<ol>
+  <li>Generate a secret key</li>
+  <li>Encrypt your input using that key</li>
+</ol>
+<a id="result"></a>
+<a id="Decrypt"></a>
+<a id="Hacker"></a>
+<form method="post" action="#result">
+  <input type="text" id="plaintext" name="plaintext" required style="width: 300px;"
+         placeholder="Secret secret data">
+  <button name="method" value="encrypt">Encrypt The Secret Secret Data</button>
+</form>
+
+{% if encrypted_data and request.form.get('method') != 'decrypt' and request.form.get('method') != 'decrypt_wrong'%}
+<br>
+<p>As you can see, in the diagram below, the data is encrypted using a key. Now the encrypted data cannot be read.
+  <p><strong>Below is the Encrypted Version of the message you typed:</strong> <code>{{ encrypted_data }}</code></p>
+<p>It is, of course, illegible.</p>
+  <img src="{{ url_for('static', filename='images/Encrypt.png') }}" alt="Encryption">
+  <br>
+<p>The next step is to send it to the second device which will decrypt it with the Key.</p>
+  <form method="post" style="display: inline;" action="#Decrypt">
+    <input type="hidden" name="method" value="decrypt">
+    <input type="hidden" name="encrypted_data" value="{{ encrypted_data }}">
+    <input type="hidden" name="key_used" value="{{ key_used }}">
+    <button type="submit"> Step 2: Decrypt with Correct Key (Device 2)</button>
+  </form>
+
+{% endif %}
+
+<hr>
+{% if decrypted_data %}
+<h4>Decrypted Data. Key is correct!</h4>
+<p> As you can see below, the data, after being sent to the Device 2, is decrypted with the key.</p>
+<p><strong> Decrypted Data using correct key:</strong> <code>{{ decrypted_data }}</code></p>
+<p><img src="{{ url_for('static', filename='images/EncryptDecrypt.png') }} " alt="Encryption and Decryption">
+</p><p>But what if there is someone without a key who gets this data?</p>
+  <form method="post" style="display: inline; margin-left: 10px;" action="#Hacker">
+    <input type="hidden" name="method" value="decrypt_wrong">
+    <input type="hidden" name="encrypted_data" value="{{ encrypted_data }}">
+    <button type="submit">Step 3: Hacker without Key</button>
+  </form>
+{% endif %}
+
+{% if failed_decryption %}
+<h4>Hacker. Key is incorrect (or non-existent)!</h4>
+  <p style="font-style: italic; color: #666;">
+    If someone intercepts the message in transit, all they see is this encrypted blob — completely unreadable without the key.
+  </p>
+<h6>Thus, a Hacker just sees :</h6>
+  <div style="background: #f1f1f1; padding: 10px; border-left: 5px solid #999;">
+    <code>{{ encrypted_data }}</code>
+  </div> <br>
+<img src="{{ url_for('static', filename='images/EncryptHacker.png') }}" alt="Encryption and Hacker">
+{% endif %}
+
+{% if key_used %}
+<br>
+    <p><strong>The Key Used:</strong> <code>{{ key_used }}</code></p>
+{% endif %}
+
+<hr>
+
+<h2>2. For Passwords → <strong>Hashing</strong></h2>
+<p>
+  Passwords should <i>never</i> be stored directly or encrypted for future retrieval. Instead, they should be hashed using a <strong>one-way hashing function</strong>:
+</p>
+<h3>What is Hashing?</h3>
+<p>
+  Hashing is a way to turn any input (like a password) into a fixed-length string of characters—called a <i>hash</i>—using a <i>one-way function</i>. That means:
+</p>
+<ul>
+  <li>You can turn a password into a hash.</li>
+  <li>But you <i>can’t reverse</i> the hash back into the original password.</li>
+</ul>
+<p>This is why hashing is used to <strong>securely store passwords</strong>.</p>
+
+<h4>Why Not Encrypt Passwords?</h4>
+<p>
+  Encryption can be reversed (decrypted), which means if someone steals the encryption key, they can get your original password.
+  But <i>hashing can’t be reversed</i>, so even if someone gets the hash, they can’t get the original password easily.
+</p>
+
+<h4>Hashing is Sensitive to Tiny Changes</h4>
+<p>
+  A small change in the input—even a <i>single character</i>—produces a <i>completely different hash</i>.
+  This is called the <i>avalanche effect</i>.
+</p>
+
+<h3>Example:</h3>
+<p>Let’s say we hash these two strings:</p>
+<ul>
+  <li><code>password123</code> → <code>ef92b778bafe771e89245b89ecbcf07e</code></li>
+  <li><code>password124</code> → <code>7d38e49a3ed189cb7c04a6f63e8c9a63</code></li>
+</ul>
+<p>
+  Even though only the last character changed (<code>3</code> → <code>4</code>), the hash is <i>completely different</i>.
+This makes it <i>impossible to guess the original input</i> by looking at the hash.</p>
+
+<p>
+  <strong>Thus,</strong> One-way hashing ensures that even if the database is leaked, original passwords cannot be easily recovered. Use strong hash functions like:
+</p>
+<ul>
+  <li><code>bcrypt</code> </li>
+  <li><code>argon2</code>  (modern, memory-hard)</li>
+  <a id="hash-result"></a>
+  <li><code>scrypt</code> </li>
+</ul>
+<hr>
+
+<h3>Step-by-Step: Password Hashing Demo</h3>
+
+<form method="post" action="#hash-result">
+  <input type="hidden" name="method" value="hash">
+  <label><strong>Step 1:</strong> Enter a password to store</label><br>
+  <input type="text" name="password_hash" value="{{ password_entered }}" required>
+  <button type="submit">Hash & Save</button>
+</form>
+
+{% if stored_hash %}
+  <p><strong>Stored Hash:</strong> <code>{{ stored_hash }}</code></p>
+
+  <details style="margin-bottom: 1rem;">
+    <summary><strong> Understand the code used</strong></summary>
+    <pre><code>
+      # Import the bcrypt library, which provides functions for hashing and verifying passwords
+      import bcrypt
+      # Hash the user's entered password using bcrypt and a newly generated salt
+      # NOTE: salt is random data added to a password before it is hashed.
+      stored_hash = bcrypt.hashpw(b"{{ password_entered }}", bcrypt.gensalt())
+    </code></pre>
+  </details>
+{% endif %}
+
+{% if stored_hash %}
+  <h3>Step 2: Verify the Password (Simulated Login)</h3>
+  <form method="post" action="#hash-result">
+    <input type="hidden" name="method" value="compare">
+    <input type="hidden" name="stored_hash" value="{{ stored_hash }}">
+    <label for="password_compare">Re-enter password:</label>
+    <input type="text" id="password_compare" name="password_compare" value="{{ password_attempt }}" required>
+    <button type="submit">Compare</button>
+  </form>
+{% endif %}
+
+{% if hash_result %}
+  <p><b> The stored hash was compared to the hash of Attempted password</b></p>
+  <p>Match Result:
+    <span style="color: {{ 'green' if hash_result == 'Match' else 'red' }}">{{ hash_result }}</span>
+  </p>
+
+  <details>
+    <summary> <b>Understand the code used</b></summary>
+    <code><pre>
+      # Check if the password attempt matches the stored hash
+      if bcrypt.checkpw(b"{{ password_attempt }}", stored_hash.encode()):
+      # If the hash of the attempt matches the stored hash, print success message
+        print("✅ Match")
+
+      else:
+      # If the hash of the attempt does not match the stored hash, print fail message
+        print("❌ Invalid password")
+    </pre></code>
+  </details>
+{% endif %}
+<hr>
+<section>
+  <h3>Adding Salt before Hashing</h3>
+  <p>
+    A salt is random data added to the password before hashing. Salting helps defend against attacks that use precomputed tables (such as rainbow tables).
+    It also helps protect passwords that occur multiple times in a database, as a new salt is used for each password instance.
+  </p>
+
+  <h4>Importance of Salting</h4>
+  <ul>
+    <li>Without salting: Two users with the same password will have the same hash.</li>
+    <li>With salting: Even if two users choose the same password, their hashes will be different because of the unique salt.</li>
+  </ul>
+
+  <h5>Example (simplified)</h5>
+  <pre><code>password123 + salt1 → hashA
+password123 + salt2 → hashB</code></pre>
+
+  <p>
+    Salting makes it much harder for attackers to crack passwords even if they know the hash function used.
+  </p>
+
+  <h4>Requirements for a Salt:</h4>
+  <p>Salts used should be</p>
+  <ul>
+    <li>Random and unique for each password</li>
+    <li>Stored along with the hash (the salt does not need to be encrypted, because knowing the salt would not help the attacker.)</li>
+  </ul>
+</section>
+
+
+<hr>
+
+<h6 style="color: darkred;">Now that you know how data is protected, In the next page, we will see an example of what happens if we do not use proper encryption and hashing.</h6>
+
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('crypto_fail.crypto_fail') }}" class="btn btn-warning"> Vulnerability Consequences </a>
+</div>
+
+{% endblock %}

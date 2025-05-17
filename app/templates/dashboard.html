@@ -8,13 +8,15 @@
   <a href="{{ url_for('main.learn') }}" class="btn btn-primary" style="margin-right: 1rem;">Learn about vulnerabilities</a>
   <br>
   <br>
-  <h6>Or feel free to explore any of the pages below:</h6>
+  <i>Or feel free to explore any of the pages below:</i>
   <ul>
     <li><a href="{{ url_for('main.learn') }}">Learn about Vulnerabilities</a></li>
     <li><a href="{{ url_for('sqli.sqli') }}">Try SQL Injection</a></li>
-    <li><a href="{{ url_for('main.xss') }}">Try XSS</a></li>
-    <li><a href="{{ url_for('main.crypto_fail') }}">Try Cryptographic Failure</a></li>
+    <li><a href="{{ url_for('xss.xss_demo') }}">Try XSS</a></li>
+    <li><a href="{{ url_for('crypto_fail.crypto_fail_fix') }}">Try Cryptographic Failure</a></li>
     <li><a href="{{ url_for('main.final_quiz') }}">Final Quiz</a></li>
     <li><a href="{{ url_for('main.logs') }}">View Logs and Quiz Scores</a></li>
   </ul>
+  <p><b style="color: darkred;"> The logs page contains details and timestamps of demo actions and Quiz results.</b></p>
+
 {% endblock %}

@@ -2,17 +2,52 @@
 {% block title %}Learn About Vulnerabilities{% endblock %}
 
 {% block content %}
-  <h2>Learn About Vulnerabilities</h2>
-  <h5><i>To Explain:</i></h5>
-  <ul><b>
-      <li>What are vulnerabilities</li>
-      <li>What is a web vulnerability</li>
-      <li>Examples of web vulnerabilities minimal</li>
-  </b> </ul>
-  <p>Learn more about:</p>
+  <h1>Vulnerabilities</h1>
+  <h2>What is a Vulnerability?</h2>
+  <p>In cybersecurity, a <strong>vulnerability</strong> is a flaw or a weakness in a system that can be taken advantage of by a malicious entity (like a hacker!) to compromise its security. These vulnerabilities when taken advantage of (or exploited) lead to unfavorable outcomes and cause significant loss to organisations and people. These unfavorable outcomes include: </p>
+  <ul>
+    <li>stealing personal or sensitive data</li>
+    <li>gaining unauthorised access</li>
+    <li>damaging or disrupting operations</li>
+  </ul>
+
+  <p>Despite best efforts, virtually all software and hardware contain <b>bugs</b> or mistakes. A vulnerability is a bug that creates a <i>security risk</i>. Not all vulnerabilities are equally dangerous. The risk level of a vulnerability depends on the nature of the vulnerability and well as the value of the surrounding system. </p>
+  <p>Some vulnerabilities can only be used for denial of service (DoS) attacks to crash a website, more dangerous ones allow the attacker to run their own harmful code <i>(called malware)</i>, without the user being aware of it.</p>
+
+  <p>One Important category of vulnerabilities is a <b>Web vulnerability.</b></p>
+
+<hr>
+
+  <h2>Web Vulnerabilities</h2>
+  <p><strong>Web Applications</strong> are programs that run on websites, such as online stores, social media platforms, or login systems. They are inherently less secure than other applications. Additionally, they often interact with users and databases and are a common target for attackers.</p>
+
+  <p><i>Web Vulnerabilities</i> are system flaws and weaknesses in these web-based applications. These vulnerabilities, when exploited, lead to data breaches, and other security incidents such as malicious entities gaining unauthorized access, manipulating data, or disrupting services.</p>
+
+  <p><strong>OWASP Top Ten</strong> is a well-known awareness document for developers that highlights the most critical security risks to web applications. This demo focuses on three of them, namely:</p>
+  <ul>
+    <li>SQL Injection</li>
+    <li>Cross-Site Scripting (XSS)</li>
+    <li>Cryptographic Failures</li>
+  </ul>
+
+    <hr>
+<h5> Please start here for the intended guide-through experience:</h5>
+<a href="{{ recommended_topic[1] }}" class="btn btn-primary" style="margin-right: 1rem;">
+  Learn about {{ recommended_topic[0] }}
+</a>  <br> <br>
+  <i>Or feel free to explore any of the pages below:</i>
+  <i><p>Learn more about:</p>
   <ul>
       <li><a href="{{ url_for('main.learn_sqli') }}">SQL Injection</a></li>
       <li><a href="{{ url_for('main.learn_xss') }}">Cross Site Scripting (XSS)</a></li>
       <li><a href="{{ url_for('main.learn_crypto') }}">Cryptographic Failures</a></li>
+  </ul></i>
+
+    <hr>
+<h2>Optional Further Reading</h2>
+  <ul>
+    <li><a href="https://en.wikipedia.org/wiki/Vulnerability_(computing)" target="_blank">Wikipedia – Vulnerability (computer security)</a></li>
+    <li><a href="https://www.ncsc.gov.uk/collection/vulnerability-management/understanding-vulnerabilities" target="_blank">UK National Cyber Security Centre – Understanding Vulnerabilities</a></li>
+    <li><a href="https://owasp.org/www-project-top-ten/" target="_blank">OWASP Top Ten Project</a></li>
   </ul>
 {% endblock %}

@@ -1,11 +1,149 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>crytof QUIZ</title>
-    <H2>Cryptof QUIZ</H2>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}Cryptographic Failures Quiz{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<h2>Cryptographic Failures Quiz</h2>
+
+{% if submitted %}
+  <hr>
+  <h3>Results</h3>
+  <p><strong>Your score:</strong> {{ score }}/{{ total }}</p>
+
+  {% if passed %}
+    <div class="alert alert-success"> You passed! Great job!</div>
+    <a href="{{ url_for("main.learn_xss") }}" class="btn btn-secondary">Learn XSS</a>
+  <a href="{{ url_for("main.learn_sqli") }}" class="btn btn-secondary">Learn SQL Injection</a>'
+   <h3>Completed All Topics?</h3>
+   <a href="{{ url_for("main.final_quiz") }}" class="btn btn-warning" >Head To Final Quiz</a>
+  {% else %}
+    <div class="alert alert-danger"> You didn't pass. Try reviewing Cryptographic Failures again.</div>
+    <a href="{{ url_for('main.learn_crypto') }}" class="btn btn-warning">Review Cryptographic Failures</a>
+  {% endif %}
+
+  {% if wrong %}
+  <hr>
+  <h4>Feedback on Incorrect Answers:</h4>
+  <ul>
+  {% for key, item in wrong.items() %}
+    <li>
+      <strong>{{ key }}:</strong> Your answer: <code>{{ item.your_answer }}</code>,
+      Correct: <code>{{ item.correct_answer }}</code><br>
+      <em>{{ item.explanation }}</em>
+    </li>
+  {% endfor %}
+  </ul>
+  {% endif %}
+  <br><br>
+  <h4>Questions:</h4>
+{% endif %}
+
+<form method="post">
+
+  <!-- Q1 -->
+  <div class="mb-4">
+    <label><strong>1. What is the risk of passwords being stored as plain text?</strong></label><br>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="a" id="q1a">
+      <label class="form-check-label" for="q1a">a. Nothing, plain text is fast</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="b" id="q1b">
+      <label class="form-check-label" for="q1b">b. Plain text means that storage is slower</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="c" id="q1c">
+      <label class="form-check-label" for="q1c">c. Passwords can be stolen and misused</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="d" id="q1d">
+      <label class="form-check-label" for="q1d">d. Users can easily recover them</label>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="mb-4">
+    <label><strong>2. What is one consequence of failing to hash stored passwords?</strong></label><br>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q2" value="a" id="q2a">
+      <label class="form-check-label" for="q2a">a. Disk usage increases</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q2" value="b" id="q2b">
+      <label class="form-check-label" for="q2b">b. Anyone with database access can retrieve real passwords</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q2" value="c" id="q2c">
+      <label class="form-check-label" for="q2c">c. Login speed increases</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q2" value="d" id="q2d">
+      <label class="form-check-label" for="q2d">d. Email gets encrypted</label>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="mb-4">
+    <label><strong>3. Why is base64 not considered encryption?</strong></label><br>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="a" id="q3a">
+      <label class="form-check-label" for="q3a">a. It uses a keyless cipher</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="b" id="q3b">
+      <label class="form-check-label" for="q3b">b. It only transforms data without hiding meaning</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="c" id="q3c">
+      <label class="form-check-label" for="q3c">c. It uses a reversible key</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="d" id="q3d">
+      <label class="form-check-label" for="q3d">d. It is symmetric</label>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="mb-4">
+    <label><strong>4. Fill in the blank: Passwords should always be hashed with a unique ______ added.</strong></label><br>
+    <input type="text" class="form-control" name="q4" placeholder="Your answer here">
+  </div>
+
+  <!-- Q5 -->
+  <div class="mb-4">
+    <label><strong>5. Match Each Option to the Item:</strong></label>
+    <p><i>Please write the option (A or B or C)</i></p>
+    <p><strong>Options:</strong></p>
+    <ul>
+      <li><strong>A</strong> - bcrypt or Fernet</li>
+      <li><strong>B</strong> - Encryption</li>
+      <li><strong>C</strong> - Base64</li>
+    </ul>
+
+    <table class="table table-bordered" style="max-width: 600px;">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Match</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Secure password hashing</td>
+          <td><input type="text" name="q5_1" class="form-control" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td>Simple Encoding</td>
+          <td><input type="text" name="q5_2" class="form-control" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td>Insufficient for passwords</td>
+          <td><input type="text" name="q5_3" class="form-control" maxlength="1"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit Quiz</button>
+</form>
+
+{% endblock %}

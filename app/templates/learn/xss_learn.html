@@ -1,20 +1,77 @@
 {% extends 'base.html' %}
 {% block title %}Learn About XSS{% endblock %}
 {% block content %}
-<h5><i>To Explain:</i></h5>
-  <ul><b>
-      <li>What is XSS</li>
-      <li>Risks?</li>
-      <li>Examples and fixing</li>
-  </b> </ul>
-    <p>Wanna Learn more?</p>
-    <ul>
-      <li>Links to pages with more info and resources</li>
-    </ul>
+  <h1>Cross-site scripting (XSS)</h1>
+    <p>
+        <strong>Cross-site scripting (XSS)</strong> is a type of vulnerability found in some websites or web applications.
+        It allows attackers to add harmful code (or scripts) into a web page that is viewed by other users. <br>
+        This can lead to harmful outcomes such as an attacker stealing personal data and changing the content that users see on a page.
+    </p>
+    <hr>
+  <h2> Understanding the Vulnerability</h2>
+    <p>
+        To understand this vulnerability, imagine a website asking for a comment (or any other input).
+        Because the page has an XSS vulnerability, this input is used within the output page generated <i>without validation</i>.
+        Instead of a comment, <i>an attacker could "trick" the website into including a malicious script when they submit the form</i> (i.e., the comment here).
+        When the page is now opened by a user, the malicious script runs without their knowledge.
+    </p>
 
+    <p>
+        The user’s browser has no way to know that the script should not be trusted and <i>will execute the script</i>.
+        Because it thinks the script came from a trusted source, the malicious script can access any cookies, session tokens, or other sensitive information retained by the browser and used with that site.
+        These scripts can even rewrite the content of the HTML page.
+    </p>
+
+    <div id=reflected_xss>
+    <hr>
+    <h2>Types of XSS Attacks</h2>
+    <Strong> <i> There are three main types of XSS attacks, namely: </i></Strong>
+    <br><br>
+    <h3>Reflected XSS</h3>
+    <p>
+        This happens when the web application <i>takes input (like something you type) and includes this in the response without checking if it's safe</i>.
+        <br>If an attacker sends a link that includes a harmful script, it could run on the user's browser as soon as it is clicked.
+        At that point, the script can carry out any action and retrieve any data to which the user has access.
+    </p> </div>
+
+    <h3>Stored XSS</h3>
+    <p>
+        In this case, the harmful script is <i>saved in the website’s database</i>.
+        On visiting the page where the script is saved, it automatically runs in the user's browser. It can affect all users who visit the page. <br>
+        This is the most dangerous type of XSS because the attacker doesn't need to trick a user into clicking a link; they just need to add the script to the website once.
+    </p>
+
+    <h3>DOM-based XSS</h3>
+    <p>
+        Here, the vulnerability <i>exists in client-side code rather than server-side code</i>.
+        It happens when the website uses JavaScript on the client side (such as in your browser) to show data.
+        If this JavaScript processes untrusted data, it could write harmful content to the page.
+        The attack happens without even needing the server to be involved.
+    </p>
+    <hr>
+    <h2>Why is it dangerous?</h2>
+    <p>
+        As discussed above, <i>XSS make affected websites unsafe for users.</i>
+        The browser trusts the malicious scripts as if they are from the website itself.
+        This enables attackers to steal sensitive information, impersonate users, and change the contents of web pages, among other malicious outcomes.
+    </p>
+    <hr>
+    <h2>Protecting from XSS</h2>
+    <p>
+        To prevent this problem, developers need to ensure that any input is properly checked and cleaned before being displayed on a page.
+        This can be done by encoding or escaping special characters and ensuring that scripts can’t be run from user inputs.
+    </p>
+<hr>
+<h2>Optional Further Reading</h2>
+<ul>
+  <li><a href="https://portswigger.net/web-security/cross-site-scripting" target="_blank">PortSwigger - Cross-site scripting</a></li>
+  <li><a href="https://owasp.org/www-community/Types_of_Cross-Site_Scripting" target="_blank">OWASP – Types of Cross-site scripting</a></li>
+  <li><a href="https://en.wikipedia.org/wiki/Cross-site_scripting" target="_blank">Wikipedia – Cross-site scripting</a></li>
+</ul>
+<hr>
 <div style="margin-top: 2rem;">
-  <a href="{{ url_for('main.learn') }}">← Back to Learn about vulnerabilities</a>
-  <a href="{{ url_for('xss.xss_demo') }}" class="btn btn-primary" style="margin-left: 1rem;">Try XSS Demo</a>
+  <a href="{{ url_for('main.learn') }}" class="btn btn-secondary mt-3">← Back to Learn about vulnerabilities</a>
+  <a href="{{ url_for('xss.xss_demo') }}" class="btn btn-success mt-3">Try XSS Demo</a>
 </div>
 
 {% endblock %}

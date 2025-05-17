@@ -3,6 +3,9 @@
 
 {% block content %}
 <h2>Fixed SQL Injection</h2>
+<div style="position: fixed; top: 0.5rem; right: 4.5rem; z-index: 1050;">
+  <a href="{{ url_for('main.learn_sqli') }}" class="btn btn-warning">Back to Learn Page</a>
+</div>
 <p> In the previous page, you executed certain queries on a vulnerable input field.
   <br>
   Please try the same inputs as before in the following box</p>
@@ -57,8 +60,8 @@
 <hr>
 
 <div style="margin-top: 2rem;">
-  <a href="{{ url_for('sqli.sqli') }}">← Back to vulnerable version</a>
-  <a href="{{ url_for('sqli.sqli_summary') }}" class="btn btn-success" style="margin-left: 1rem;">What You Learned</a>
+  <a href="{{ url_for('sqli.sqli') }}" class="btn btn-secondary mt-3"> Back to vulnerable version</a>
+  <a href="{{ url_for('sqli.sqli_summary') }}" class="btn btn-success mt-3">What You Learned</a>
 </div>
 
 {% endblock %}

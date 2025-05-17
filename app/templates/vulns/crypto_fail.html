@@ -1,12 +1,128 @@
 {% extends 'base.html' %}
-{% block title %}Cryptographic Failure{% endblock %}
+{% block title %}Weak Password Storage Demo{% endblock %}
+
 {% block content %}
-  <h2>Try Cryptographic Failure</h2>
-  <form method="POST" action="{{ url_for('main.crypto_fail') }}">
-    <div class="mb-3">
-      <label for="message" class="form-label">Enter a message to "encrypt"</label>
-      <input type="text" class="form-control" name="message" id="message">
-    </div>
-    <button type="submit" class="btn btn-secondary">Submit</button>
-  </form>
+<h1>Cryptographic Failure Demo</h1>
+<hr>
+<p style="color: darkred;">NOTE: This page will demonstrate an example of a cryptographic failure where a user account is compromised</p>
+<div style="position: fixed; top: 0.5rem; right: 4.5rem; z-index: 1050;">
+  <a href="{{ url_for('main.learn_crypto') }}" class="btn btn-warning">Back to Learn Page</a>
+</div>
+<hr>
+<p>
+  <strong>Imagine you're a hacker.</strong><br></p>
+
+  <p>Using a vulnerability like <a href="{{ url_for('main.learn_sqli') }}" target="_blank">SQL injection</a>, a <strong>man-in-the-middle attack</strong>, or even a previous data breach, you've gained access to two user databases.</p>
+
+  <p>It so happens that these databases also do <strong>not</strong> use proper encryption to protect data in transit either (the previous page contains more elaboration on that). As a result, <i>everything</i> on the database exposed. Once you have the data, it’s fully yours to misuse (𓁹‿ 𓁹).
+</p>
+
+<p>
+  Below are two tables storing users and their passwords. Using this exposed data, the task is to simulate logging in as one of these users.
+</p>
+
+
+<h3>Table 1 — Plaintext Passwords</h3>
+<table border="1" cellpadding="6">
+  <thead>
+    <tr><th>Username</th><th>Password (Plaintext)</th></tr>
+  </thead>
+  <tbody>
+    {% for user, pw in user_data_plaintext.items() %}
+      <tr><td>{{ user }}</td><td>{{ pw }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr>
+
+<h3>Try Logging In</h3>
+<a id="plain-result"></a>
+<p>Use the credentials above to simulate how easily these weak passwords are accepted by the system.</p>
+
+
+<h4>Plaintext Login</h4>
+<form method="post"  action="#plain-result">
+  <input type="hidden" name="method" value="plain">
+  <label for="username_plain">Username:</label>
+  <input type="text" name="username_plain" id="username_plain" required>
+  <label for="password_plain">Password:</label>
+  <input type="password" name="password_plain" id="password_plain" required>
+  <button type="submit">Check Plaintext</button>
+</form>
+
+{% if query_plain %}
+    <span style="color: {{ 'green' if result_plain == 'success' else 'red' }}">
+     <strong>Login {{ result_plain }}</strong>
+    </span>
+<br>
+   <p>
+  <b>Comparison Attempted</b>
+  <pre>{{ query_plain }}</pre></p>
+{% endif %}
+
+<hr>
+<h3>What’s the Risk?</h3>
+<ul>
+  <li><strong>Plaintext:</strong> Anyone who gains access to this database immediately knows every user's password. There's no protection and all data is instantly compromised.</li>
+  <li><strong>No audit trail or integrity:</strong> If attackers tamper with stored values, there's no way to detect it. There’s no cryptographic verification possible.</li>
+</ul>
+
+<hr>
+<p>Take a look at these passwords</p>
+<br>
+<h3>Table 2 — Base64 Encoded Passwords</h3>
+<table border="1" cellpadding="6">
+  <thead>
+    <tr><th>Username</th><th>Password (Base64)</th></tr>
+  </thead>
+  <tbody>
+    {% for user, b64 in user_data_base64.items() %}
+      <tr>
+        <td>{{ user }}</td>
+        <td>{{ b64 }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<p> Before logging in, you have to decode the passwords but decoding base64 is very easy and can be done using many resources online.
+  <br>
+  One such decoder is <a href="https://www.base64decode.org/" target="_blank">this website</a>.
+</p>
+
+<a id="b64-result"></a>
+<h4>Base64 Login</h4>
+<p>Please decode the base64 passwords using the above link and try to login</p>
+<form method="post" action="#b64-result">
+  <input type="hidden" name="method" value="b64">
+  <label for="username_b64">Username:</label>
+  <input type="text" name="username_b64" id="username_b64" required>
+  <label for="password_b64">Password:</label>
+  <input type="password" name="password_b64" id="password_b64" required>
+  <button type="submit">Check Base64</button>
+</form>
+
+{% if query_b64 %}
+    <span style="color: {{ 'green' if result_b64 == 'success' else 'red' }}">
+      <strong>Login {{ result_b64 }}</strong>
+    </span>
+<br>
+  <p>
+  <b>Comparison Attempted</b>
+  <pre>{{ query_b64 }}</pre></p>
+{% endif %}
+
+<hr>
+<h3>What’s the Risk?</h3>
+<ul>
+  <li> <strong>Base64 Encoding:</strong> This is not any form of security or encryption. It's easily reversible and tools, libraries, and websites can decode it in seconds.</li>
+  <li> <strong>False sense of security:</strong> Developers might think Base64 hides passwords. It doesn’t. Attackers can read everything with no effort.</li>
+</ul>
+
+<div style="margin-top: 2rem;">
+  <a href="{{ url_for('crypto_fail.crypto_fail_fix') }}" class="btn btn-secondary">Back to Demo</a>
+  <a href="{{ url_for('crypto_fail.crypto_fail_summary') }}" class="btn btn-success" style="margin-left: 1rem;">What You Learned</a>
+</div>
+
 {% endblock %}

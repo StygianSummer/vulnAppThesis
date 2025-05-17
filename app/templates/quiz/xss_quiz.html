@@ -1,11 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>XSS QUIZ</title>
-    <H2>XSS QUIZ</H2>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block title %}XSS Quiz{% endblock %}
 
-</body>
-</html>
+{% block content %}
+<h2>XSS Quiz</h2>
+
+{% if submitted %}
+  <hr>
+  <h3>Results</h3>
+  <p><strong>Your score:</strong> {{ score }}/{{ total }}</p>
+
+  {% if passed %}
+    <div class="alert alert-success">✅ You passed! Great job!</div>
+    <a href="{{ url_for('main.learn_crypto') }}" class="btn btn-secondary">Learn Cryptographic Failures</a>
+    <a href="{{ url_for('main.learn_sqli') }}" class="btn btn-secondary">Learn SQL Injection</a>
+    <h3>Completed All Topics?</h3>
+   <a href="{{ url_for("main.final_quiz") }}" class="btn btn-warning" >Head To Final Quiz</a>
+  {% else %}
+    <div class="alert alert-danger">❌ You didn't pass. Try reviewing XSS again.</div>
+    <a href="{{ url_for('main.learn_xss') }}" class="btn btn-warning">Review XSS</a>
+  {% endif %}
+
+  {% if wrong %}
+    <hr>
+    <h4>Feedback on Incorrect Answers:</h4>
+    <ul>
+    {% for key, item in wrong.items() %}
+      <li>
+        <strong>{{ key }}:</strong> Your answer: <code>{{ item.your_answer }}</code>,
+        Correct: <code>{{ item.correct_answer }}</code><br>
+        <em>{{ item.explanation }}</em>
+      </li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+<br><br>
+<h4>Questions:</h4>
+{% endif %}
+
+<form method="post">
+
+  <!-- Q1 -->
+  <div class="mb-4">
+    <label><strong>1. Which of these describes a Stored XSS attack?</strong></label><br>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="a" id="q1a">
+      <label class="form-check-label" for="q1a">a. The attack is reflected off the URL</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="b" id="q1b">
+      <label class="form-check-label" for="q1b">b. The payload is executed by server-side logic only</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="c" id="q1c">
+      <label class="form-check-label" for="q1c">c. The malicious script is stored in the database and served to future users</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="d" id="q1d">
+      <label class="form-check-label" for="q1d">d. It only affects admin users</label>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="mb-4">
+    <label><strong>2. Fill in the blank: Which XSS attack is the most dangerous type (one word answer only)?</strong></label><br>
+    <input type="text" class="form-control" name="q2" placeholder="Your answer here">
+  </div>
+
+
+  <!-- Q3 -->
+  <div class="mb-4">
+    <label><strong>3. What does the browser do when it sees <code>&lt;script&gt;alert('x')&lt;/script&gt;</code> in a page?</strong></label><br>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="X" id="q3a">
+      <label class="form-check-label" for="q3a">X. Ignores it</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="Y" id="q3b">
+      <label class="form-check-label" for="q3b">Y. Escapes it</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="Z" id="q3c">
+      <label class="form-check-label" for="q3c">Z. Executes it</label>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="mb-4">
+    <label><strong>4. Which of these is an example of a XSS payload?</strong></label><br>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q4" value="A" id="q4a">
+      <label class="form-check-label" for="q4a">A. document.write()</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q4" value="B" id="q4b">
+      <label class="form-check-label" for="q4b">B. alert("xss")</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q4" value="C" id="q4c">
+      <label class="form-check-label" for="q4c">C. htmlspecialchars()</label>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="mb-4">
+    <label><strong>5. Match the following.</strong></label>
+    <p><i>Please write the option (A or B or C)</i></p>
+    <p><strong>Options:</strong></p>
+    <ul>
+      <li><strong>A</strong> - DOM XSS</li>
+      <li><strong>B</strong> - Reflected XSS</li>
+      <li><strong>C</strong> - Stored XSS</li>
+    </ul>
+
+    <table class="table table-bordered" style="max-width: 600px;">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Match</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>XSS via query string</td>
+          <td><input type="text" name="q5_1" class="form-control" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td>XSS in database content</td>
+          <td><input type="text" name="q5_2" class="form-control" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td>XSS via Java Script on client</td>
+          <td><input type="text" name="q5_3" class="form-control" maxlength="1"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit Quiz</button>
+</form>
+
+{% endblock %}

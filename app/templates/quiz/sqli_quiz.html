@@ -4,31 +4,36 @@
 {% block content %}
 <h2>SQL Injection Quiz</h2>
 
-
 {% if submitted %}
   <hr>
   <h3>Results</h3>
   <p><strong>Your score:</strong> {{ score }}/{{ total }}</p>
 
   {% if passed %}
-    <div class="alert alert-success">✅ You passed! Great job!</div>
-    <a href="{{ url_for('main.learn_xss') }}" class="btn btn-primary">Next: Learn XSS</a>
-  {% else %}
-    <div class="alert alert-danger">❌ You didn't pass. Try reviewing SQL Injection again.</div>
+    <div class="alert alert-success"> You passed! Great job!</div>
+   <a href="{{ url_for("main.learn_xss") }}" class="btn btn-secondary">Learn XSS</a>
+  <a href="{{ url_for("main.learn_crypto") }}" class="btn btn-secondary">Learn Cryptographic Failures</a>'
+   <h3>Completed All Topics?</h3>
+   <a href="{{ url_for("main.final_quiz") }}" class="btn btn-warning" >Head To Final Quiz</a>
+{% else %}
+<div class="alert alert-danger"> You didn't pass. Try reviewing SQL Injection again.</div>
     <a href="{{ url_for('main.learn_sqli') }}" class="btn btn-warning">Review SQL Injection</a>
   {% endif %}
 
   {% if wrong %}
-    <hr>
-    <h4>Feedback on Incorrect Answers:</h4>
-    <ul>
-    {% for key, item in wrong.items() %}
-      <li><strong>{{ key }}:</strong> Your answer: <code>{{ item.your_answer }}</code>, Correct: <code>{{ item.correct_answer }}</code></li>
-    {% endfor %}
+  <hr>
+  <h4>Feedback on Incorrect Answers:</h4>
+  <ul>
+  {% for key, item in wrong.items() %}
+    <li>
+      <strong>{{ key }}:</strong> Your answer: <code>{{ item.your_answer }}</code>,
+      Correct: <code>{{ item.correct_answer }}</code><br>
+      <em>{{ item.explanation }}</em>
+    </li>
+  {% endfor %}
     </ul>
   {% endif %}
-<br>
-<br>
+<br><br>
 <h4>Questions:</h4>
 {% endif %}
 
@@ -36,82 +41,102 @@
 
   <!-- Q1 -->
   <div class="mb-4">
-    <label><strong>1. Question </strong></label><br>
+    <label><strong>1. Why would you use parameterized queries in a web application?</strong></label><br>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="q1" value="opt1" id="q1a">
-      <label class="form-check-label" for="q1a">Option 1</label>
+      <input class="form-check-input" type="radio" name="q1" value="a" id="q1a">
+      <label class="form-check-label" for="q1a">a. They make the codebase clearer</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="q1" value="opt2" id="q1b">
-      <label class="form-check-label" for="q1b">Option 2 (correct)</label>
+      <input class="form-check-input" type="radio" name="q1" value="b" id="q1b">
+      <label class="form-check-label" for="q1b">b. They look cleaner</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="c" id="q1c">
+      <label class="form-check-label" for="q1c">c. They separate data from SQL logic</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q1" value="d" id="q1d">
+      <label class="form-check-label" for="q1d">d. They speed up SQL execution</label>
     </div>
   </div>
 
   <!-- Q2 -->
   <div class="mb-4">
-    <label><strong>2. Question</strong></label><br>
+    <label><strong>2. Directly concatenating (aka combining) user input with SQL queries is dangerous. Why?</strong></label><br>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="q2" value="opt1" id="q2a">
-      <label class="form-check-label" for="q2a">Option A (correct)</label>
+      <input class="form-check-input" type="radio" name="q2" value="a" id="q2a">
+      <label class="form-check-label" for="q2a">a. It allows faster query execution and can overwhelm server resources</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="q2" value="opt2" id="q2b">
-      <label class="form-check-label" for="q2b">Option B</label>
+      <input class="form-check-input" type="radio" name="q2" value="b" id="q2b">
+      <label class="form-check-label" for="q2b">b. It complicates query syntax and causes errors</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q2" value="c" id="q2c">
+      <label class="form-check-label" for="q2c">c. It lets attackers inject malicious queries</label>
     </div>
   </div>
 
   <!-- Q3 -->
   <div class="mb-4">
-    <label><strong>3. Question</strong></label><br>
+    <label><strong>3. What does the following payload try to do? <code>1' OR '1'='1</code></strong></label><br>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="q3" value="x" id="q3a">
-      <label class="form-check-label" for="q3a">Choice X (correct)</label>
+      <input class="form-check-input" type="radio" name="q3" value="a" id="q3a">
+      <label class="form-check-label" for="q3a">a. Injects CSS</label>
     </div>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="q3" value="y" id="q3b">
-      <label class="form-check-label" for="q3b">Choice Y</label>
+      <input class="form-check-input" type="radio" name="q3" value="b" id="q3b">
+      <label class="form-check-label" for="q3b">b. Always evaluates to TRUE</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="c" id="q3c">
+      <label class="form-check-label" for="q3c">c. Escapes characters</label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="q3" value="d" id="q3d">
+      <label class="form-check-label" for="q3d">d. Deletes rows</label>
     </div>
   </div>
 
   <!-- Q4 -->
   <div class="mb-4">
-    <label><strong>4. A fill in the blank (answer in 1-4 words, answer is x)</strong></label><br>
+    <label><strong>4. Fill in the blank: The best way to prevent SQL injection is to use ________ statements.</strong></label><br>
     <input type="text" class="form-control" name="q4" placeholder="Your answer here">
   </div>
 
   <!-- Q5 -->
   <div class="mb-4">
-  <label><strong>5. Match Each Option to the Item:</strong></label>
-  <p><i>Please write the option (A or B or C)</i></p>
-  <p><strong>Options:</strong></p>
-  <ul>
-    <li><strong>A</strong> - Option A</li>
-    <li><strong>B</strong> - Option B</li>
-    <li><strong>C</strong> - Option C</li>
-  </ul>
+    <label><strong>5. Match Each Option to the Item:</strong></label>
+    <p><i>Please write the option (A or B or C)</i></p>
+    <p><strong>Options:</strong></p>
+    <ul>
+      <li><strong>A</strong> - SQL Injection attack</li>
+      <li><strong>B</strong> - Prepared Statement</li>
+      <li><strong>C</strong> - Unsanitized Input</li>
+    </ul>
 
-  <table class="table table-bordered" style="max-width: 600px;">
-    <thead>
-      <tr>
-        <th>Item</th>
-        <th>Match</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>Item 1</td>
-        <td><input type="text" name="q5_1" class="form-control" maxlength="1"></td>
-      </tr>
-      <tr>
-        <td>Item 2</td>
-        <td><input type="text" name="q5_2" class="form-control" maxlength="1"></td>
-      </tr>
-      <tr>
-        <td>Item 3</td>
-        <td><input type="text" name="q5_3" class="form-control" maxlength="1"></td>
-      </tr>
-    </tbody>
-  </table>
+    <table class="table table-bordered" style="max-width: 600px;">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Match</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Dangerous practice</td>
+          <td><input type="text" name="q5_1" class="form-control" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td>Safe query method</td>
+          <td><input type="text" name="q5_2" class="form-control" maxlength="1"></td>
+        </tr>
+        <tr>
+          <td>- '; DROP TABLE users; --</td>
+          <td><input type="text" name="q5_3" class="form-control" maxlength="1"></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
   <button type="submit" class="btn btn-success">Submit Quiz</button>
