@@ -8,7 +8,7 @@ This project was created as a part of a Bachelor Thesis. It is a web application
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Try the Application
-To simply try the application without setting it up locally on your device, contact the me(contact details below) to schedule a time where I can port forward the application. 
+To simply try the application without setting it up locally on your device, contact me (contact details below) to schedule a time where I can port forward the application. 
 
 ## Local Setup
 ### Requirements
