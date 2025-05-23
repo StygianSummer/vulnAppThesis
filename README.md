@@ -1,6 +1,6 @@
 ## About The Project
 This project was created as a part of a Bachelor Thesis. It is a web application demonstrating 3 web vulnerabilities, namely SQL Injection, XSS, and Cryptographic Failures. 
-The main research question guiding the devolopment of this application was <Br>
+The main research question guiding the devolopment of this application was: <Br>
 <i>How can a user-friendly web application simulate real-world web vulnerabilities (SQL Injection, Cross-Site Scripting (XSS), and Cryptographic Failures) and incorporate interactive features such as feedback, quizzes and logs, to enhance both hands-on-learning and conceptual understanding in Cybersecurity education?  </i>
 
 <br> The structure of this web application is as follows:
